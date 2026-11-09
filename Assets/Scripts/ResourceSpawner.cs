@@ -1,6 +1,8 @@
 
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class ResourceSpawner : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class ResourceSpawner : MonoBehaviour
     // Speichert, welche SpawnPoints belegt sind
     private Dictionary<Transform, GameObject> occupiedPoints =
         new Dictionary<Transform, GameObject>();
+
+    private void Start()
+    {
+        CheckForNullables();
+    }
 
     private void Update()
     {
@@ -60,10 +67,10 @@ public class ResourceSpawner : MonoBehaviour
 
         // Zufaelligen freien Punkt auswaehlen
         Transform spawnPoint =
-            freePoints[Random.Range(0, freePoints.Count)];
+            freePoints[UnityEngine.Random.Range(0, freePoints.Count)];
 
         GameObject prefab =
-            resourcePrefabs[Random.Range(0, resourcePrefabs.Length)];
+            resourcePrefabs[UnityEngine.Random.Range(0, resourcePrefabs.Length)];
 
         GameObject resource = Instantiate(
             prefab,
@@ -72,5 +79,10 @@ public class ResourceSpawner : MonoBehaviour
         );
 
         occupiedPoints[spawnPoint] = resource;
+    }
+    private void CheckForNullables()
+    {
+        if (resourcePrefabs == null) throw new InvalidOperationException(nameof(resourcePrefabs) + " fehlt");
+        if (spawnPoints == null) throw new InvalidOperationException(nameof(spawnPoints) + " fehlt");
     }
 }

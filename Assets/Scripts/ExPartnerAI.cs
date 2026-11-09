@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class ExPartnerAI : MonoBehaviour
@@ -9,6 +10,7 @@ public class ExPartnerAI : MonoBehaviour
 
     [SerializeField] private int stressDamage = 10;
     [SerializeField] private float damageCooldown = 2f;
+    [SerializeField] private GameObject originalPlayer;
 
     private Rigidbody2D rb;
     private Transform player;
@@ -18,13 +20,9 @@ public class ExPartnerAI : MonoBehaviour
 
     private void Start()
     {
+        CheckForNullables();
         rb = GetComponent<Rigidbody2D>();
-
-        GameObject playerObject =
-            GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObject != null)
-            player = playerObject.transform;
+        player = originalPlayer.transform;
 
         ChooseNewDirection();
     }
@@ -32,29 +30,25 @@ public class ExPartnerAI : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 moveDirection = direction;
-
-        if (player != null)
-        {
-            Vector2 toPlayer =
+        Vector2 toPlayer =
                 (Vector2)player.position - rb.position;
 
-            float distance = toPlayer.magnitude;
+        float distance = toPlayer.magnitude;
 
-            bool wallBetween = Physics2D.Linecast(
-                rb.position,
-                player.position,
-                obstacleLayer
-            ).collider != null;
+        bool wallBetween = Physics2D.Linecast(
+            rb.position,
+            player.position,
+            obstacleLayer
+        ).collider != null;
 
-            if (distance < detectionRange && !wallBetween)
-            {
-                moveDirection = toPlayer.normalized;
-            }
-            else if (Time.time >= changeDirectionTime)
-            {
-                ChooseNewDirection();
-                moveDirection = direction;
-            }
+        if (distance < detectionRange && !wallBetween)
+        {
+            moveDirection = toPlayer.normalized;
+        }
+        else if (Time.time >= changeDirectionTime)
+        {
+            ChooseNewDirection();
+            moveDirection = direction;
         }
 
         // Hindernisse vor der Figur erkennen
@@ -79,7 +73,7 @@ public class ExPartnerAI : MonoBehaviour
 
     private void ChooseNewDirection()
     {
-        float angle = Random.Range(0f, 360f);
+        float angle = UnityEngine.Random.Range(0f, 360f);
 
         direction = new Vector2(
             Mathf.Cos(angle * Mathf.Deg2Rad),
@@ -110,5 +104,10 @@ public class ExPartnerAI : MonoBehaviour
         GameManager.Instance.AddStress(stressDamage);
 
         nextDamageTime = Time.time + damageCooldown;
+    }
+
+    private void CheckForNullables()
+    {
+        if (originalPlayer == null) throw new InvalidOperationException(nameof(originalPlayer) + " fehlt");
     }
 }

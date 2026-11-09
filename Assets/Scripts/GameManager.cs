@@ -1,21 +1,22 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [Header("Ressourcen")]
-    private int money = 0;
-    private int toys = 0;
-    private int food = 0;
+    [SerializeField] private int money = 0;
+    [SerializeField] private int toys = 0;
+    [SerializeField] private int food = 0;
 
     [Header("Beziehungen und Stress")]
-    [SerializeField][Range(0, 100)] private int stress = 50;
-    [SerializeField][Range(0, 100)] private int child1 = 80;
-    [SerializeField][Range(0, 100)] private int child2 = 80;
-    [SerializeField][Range(0, 100)] private int partner = 60;
+    [SerializeField] [Range(0, 100)] private int stress = 50;
+    [SerializeField] [Range(0, 100)] private int child1 = 80;
+    [SerializeField] [Range(0, 100)] private int child2 = 80;
+    [SerializeField] [Range(0, 100)] private int partner = 60;
 
     [Header("Statusbalken")]
     //maybe diese Slider in eine Liste packen, damit wir uns nicht abhalten müssen
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        CheckForNullables();
         UpdateUI();
     }
 
@@ -116,25 +118,23 @@ public class GameManager : MonoBehaviour
     //UpdateUI kann maybe in eine Update Funktion und muss dann nicht immer wieder in jeder funktion aufgerufen werden
     private void UpdateUI()
     {
-        //Die können nicht null sein glaube ich
-        if (stressSlider != null)
-            stressSlider.value = stress;
-
-        if (child1Slider != null)
-            child1Slider.value = child1;
-
-        if (child2Slider != null)
-            child2Slider.value = child2;
-
-        if (partnerSlider != null)
-            partnerSlider.value = partner;
-
-        if (moneyText != null)
-            moneyText.text = "MONEY: " + money + " €";
+        stressSlider.value = stress;
+        child1Slider.value = child1;
+        child2Slider.value = child2;
+        partnerSlider.value = partner;
+        moneyText.text = "MONEY: " + money + " €";
     }
 
     public int ReturnStress()
     {
         return stress;
+    }
+    private void CheckForNullables()
+    {
+        if (stressSlider == null) throw new InvalidOperationException(nameof(stressSlider) + " fehlt");
+        if (child1Slider == null) throw new InvalidOperationException(nameof(child1Slider) + " fehlt");
+        if (child2Slider == null) throw new InvalidOperationException(nameof(child2Slider) + " fehlt");
+        if (partnerSlider == null) throw new InvalidOperationException(nameof(partnerSlider) + " fehlt");
+        if (moneyText == null) throw new InvalidOperationException(nameof(moneyText) + " fehlt");
     }
 }

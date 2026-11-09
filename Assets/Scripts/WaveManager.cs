@@ -1,6 +1,7 @@
 
-using UnityEngine;
+using System;
 using TMPro;
+using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
@@ -24,15 +25,13 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        CheckForNullables();
         timeLeft = waveDuration;
 
         Time.timeScale = 1f;
 
-        if (resultText != null)
-            resultText.gameObject.SetActive(false);
-
-        if (waveText != null)
-            waveText.text = "1 / 5";
+        resultText.gameObject.SetActive(false);
+        waveText.text = "1 / 5";
 
         UpdateTimer();
     }
@@ -73,9 +72,6 @@ public class WaveManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        if (timerText == null)
-            return;
-
         int seconds = Mathf.CeilToInt(
             Mathf.Max(0f, timeLeft)
         );
@@ -90,23 +86,25 @@ public class WaveManager : MonoBehaviour
     void EndWave(bool won)
     {
         waveRunning = false;
+        resultText.gameObject.SetActive(true);
 
-        if (resultText != null)
-        {
-            resultText.gameObject.SetActive(true);
+        resultText.text = won
+            ? "WAVE 1 COMPLETE!"
+            : "GAME OVER!\nTOO MUCH STRESS!";
 
-            resultText.text = won
-                ? "WAVE 1 COMPLETE!"
-                : "GAME OVER!\nTOO MUCH STRESS!";
-        }
-
-        if (resourceSpawner != null)
-            resourceSpawner.enabled = false;
-
-        if (exPartner != null)
-            exPartner.enabled = false;
+        resourceSpawner.enabled = false;
+        exPartner.enabled = false;
 
         // Spiel anhalten
         Time.timeScale = 0f;
+    }
+
+    private void CheckForNullables()
+    {
+        if (timerText == null) throw new InvalidOperationException(nameof(timerText) + " fehlt");
+        if (waveText == null) throw new InvalidOperationException(nameof(waveText) + " fehlt");
+        if (resultText == null) throw new InvalidOperationException(nameof(resultText) + " fehlt");
+        if (resourceSpawner == null) throw new InvalidOperationException(nameof(resourceSpawner) + " fehlt");
+        if (exPartner == null) throw new InvalidOperationException(nameof(exPartner) + " fehlt");
     }
 }
