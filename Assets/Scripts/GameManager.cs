@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,48 +7,56 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Ressourcen")]
-    public int money = 0;
-    public int toys = 0;
-    public int food = 0;
+    private int money = 0;
+    private int toys = 0;
+    private int food = 0;
 
     [Header("Beziehungen und Stress")]
-    [Range(0, 100)] public int stress = 50;
-    [Range(0, 100)] public int child1 = 80;
-    [Range(0, 100)] public int child2 = 80;
-    [Range(0, 100)] public int partner = 60;
+    [SerializeField][Range(0, 100)] private int stress = 50;
+    [SerializeField][Range(0, 100)] private int child1 = 80;
+    [SerializeField][Range(0, 100)] private int child2 = 80;
+    [SerializeField][Range(0, 100)] private int partner = 60;
 
     [Header("Statusbalken")]
-    public Slider stressSlider;
-    public Slider child1Slider;
-    public Slider child2Slider;
-    public Slider partnerSlider;
+    //maybe diese Slider in eine Liste packen, damit wir uns nicht abhalten müssen
+    [SerializeField] private Slider stressSlider;
+    [SerializeField] private Slider child1Slider;
+    [SerializeField] private Slider child2Slider;
+    [SerializeField] private Slider partnerSlider;
 
     [Header("Textanzeigen")]
-    public TMP_Text moneyText;
+    [SerializeField] private TMP_Text moneyText;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         UpdateUI();
     }
 
     public void Collect(string resource)
     {
-        if (resource == "Money")
-            money += 10;
+        switch (resource)
+        {
+            case "Money":
+                money += 10;
+                break;
+            case "Heart":
+                AddStress(-10);
+                break;
+            case "Toy":
+                toys++;
+                break;
+            case "Food":
+                food++;
+                break;
+            default:
+                break;
 
-        if (resource == "Heart")
-            AddStress(-10);
-
-        if (resource == "Toy")
-            toys++;
-
-        if (resource == "Food")
-            food++;
+        }
 
         Debug.Log("Spielzeug: " + toys +
                   " | Essen: " + food);
@@ -106,7 +113,8 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void UpdateUI()
+    //UpdateUI kann maybe in eine Update Funktion und muss dann nicht immer wieder in jeder funktion aufgerufen werden
+    private void UpdateUI()
     {
         if (stressSlider != null)
             stressSlider.value = stress;
@@ -122,5 +130,10 @@ public class GameManager : MonoBehaviour
 
         if (moneyText != null)
             moneyText.text = "MONEY: " + money + " €";
+    }
+
+    public int ReturnStress()
+    {
+        return stress;
     }
 }

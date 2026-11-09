@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public enum ResourceType
+    private enum ResourceType
     {
         Heart,
         Money,
@@ -11,7 +11,7 @@ public class Collectible : MonoBehaviour
         Food
     }
 
-    public ResourceType resourceType;
+    private ResourceType resourceType;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

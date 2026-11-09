@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
         UpdateTimer();
 
         // Zuerst prüfen, ob der Spieler verloren hat
-        if (GameManager.Instance.stress >= 100)
+        if (GameManager.Instance.ReturnStress() >= 100)
         {
             EndWave(false);
             return;

@@ -1,17 +1,17 @@
-
 using UnityEngine;
 
 public class ChildNeeds : MonoBehaviour
 {
+    //ChildNumber muss geclean coded werden, damit man später mehrere Kinder hinzufügen kann
     [Header("Welches Kind?")]
     public int childNumber = 1;
 
     [Header("Beduerfnisse")]
-    public float needInterval = 15f;
+    [SerializeField] private float needInterval = 15f;
 
     private float timer = 0f;
 
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
 
@@ -19,6 +19,7 @@ public class ChildNeeds : MonoBehaviour
         {
             timer = 0f;
 
+            //Mit dem Team besprechen, ob wir solche Zeilenumbrüche lassen.
             GameManager.Instance
                 .LoseChildRelationship(childNumber);
 
@@ -28,13 +29,12 @@ public class ChildNeeds : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        bool success = GameManager.Instance
-            .GiveToChild(childNumber);
+        bool success = GameManager.Instance.GiveToChild(childNumber);
 
         if (success)
         {
@@ -46,7 +46,7 @@ public class ChildNeeds : MonoBehaviour
         {
             Debug.Log(
                 "Du hast nicht die passende Ressource!"
-            );
+                );
         }
     }
 }

@@ -4,17 +4,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         movement = Vector2.zero;
 
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         movement = movement.normalized;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         rb.MovePosition(
             rb.position + movement * moveSpeed * Time.fixedDeltaTime
