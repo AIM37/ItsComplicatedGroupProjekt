@@ -5,28 +5,26 @@ using TMPro;
 public class WaveManager : MonoBehaviour
 {
     [Header("Wave 1")]
-    public float waveDuration = 60f;
-    public float stressInterval = 10f;
-    public int stressIncrease = 5;
+    [SerializeField] private float waveDuration = 60f;
+    [SerializeField] private float stressInterval = 10f;
+    [SerializeField] private int stressIncrease = 5;
 
     [Header("UI")]
-    public TMP_Text timerText;
-    public TMP_Text waveText;
-    public TMP_Text resultText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text resultText;
 
     [Header("Andere Systeme")]
-    public ResourceSpawner resourceSpawner;
-    public ExPartnerAI exPartner;
+    [SerializeField] private ResourceSpawner resourceSpawner;
+    [SerializeField] private ExPartnerAI exPartner;
 
     private float timeLeft;
-    private float stressTimer;
-    private bool waveRunning;
+    private float stressTimer = 0f;
+    private bool waveRunning = true;
 
-    void Start()
+    private void Start()
     {
         timeLeft = waveDuration;
-        stressTimer = 0f;
-        waveRunning = true;
 
         Time.timeScale = 1f;
 
@@ -39,7 +37,7 @@ public class WaveManager : MonoBehaviour
         UpdateTimer();
     }
 
-    void Update()
+    private void Update()
     {
         if (!waveRunning)
             return;

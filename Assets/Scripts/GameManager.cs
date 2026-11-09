@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
     //UpdateUI kann maybe in eine Update Funktion und muss dann nicht immer wieder in jeder funktion aufgerufen werden
     private void UpdateUI()
     {
+        //Die können nicht null sein glaube ich
         if (stressSlider != null)
             stressSlider.value = stress;
 

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class ExPartnerAI : MonoBehaviour
 {
-    public float moveSpeed = 1.5f;
-    public float detectionRange = 3f;
-    public LayerMask obstacleLayer;
+    [SerializeField] private float moveSpeed = 1.5f;
+    [SerializeField] private float detectionRange = 3f;
+    [SerializeField] private LayerMask obstacleLayer;
 
-    public int stressDamage = 10;
-    public float damageCooldown = 2f;
+    [SerializeField] private int stressDamage = 10;
+    [SerializeField] private float damageCooldown = 2f;
 
     private Rigidbody2D rb;
     private Transform player;
@@ -16,7 +16,7 @@ public class ExPartnerAI : MonoBehaviour
     private float changeDirectionTime;
     private float nextDamageTime;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
@@ -29,7 +29,7 @@ public class ExPartnerAI : MonoBehaviour
         ChooseNewDirection();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Vector2 moveDirection = direction;
 
@@ -77,7 +77,7 @@ public class ExPartnerAI : MonoBehaviour
         );
     }
 
-    void ChooseNewDirection()
+    private void ChooseNewDirection()
     {
         float angle = Random.Range(0f, 360f);
 
@@ -89,17 +89,17 @@ public class ExPartnerAI : MonoBehaviour
         changeDirectionTime = Time.time + 2f;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         TryCauseStress(collision);
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         TryCauseStress(collision);
     }
 
-    void TryCauseStress(Collision2D collision)
+    private void TryCauseStress(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player"))
             return;

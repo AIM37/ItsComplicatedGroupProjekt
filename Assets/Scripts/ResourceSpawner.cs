@@ -5,14 +5,14 @@ using System.Collections.Generic;
 public class ResourceSpawner : MonoBehaviour
 {
     [Header("Ressourcen-Prefabs")]
-    public GameObject[] resourcePrefabs;
+    [SerializeField] private GameObject[] resourcePrefabs;
 
     [Header("Moegliche Spawn-Positionen")]
-    public Transform[] spawnPoints;
+    [SerializeField] private Transform[] spawnPoints;
 
     [Header("Einstellungen")]
-    public float spawnInterval = 4f;
-    public int maxResources = 12;
+    [SerializeField] private float spawnInterval = 4f;
+    [SerializeField] private int maxResources = 12;
 
     private float timer;
 
@@ -20,7 +20,7 @@ public class ResourceSpawner : MonoBehaviour
     private Dictionary<Transform, GameObject> occupiedPoints =
         new Dictionary<Transform, GameObject>();
 
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
 
@@ -31,7 +31,7 @@ public class ResourceSpawner : MonoBehaviour
         }
     }
 
-    void SpawnResource()
+    private void SpawnResource()
     {
         if (resourcePrefabs.Length == 0 ||
             spawnPoints.Length == 0)
