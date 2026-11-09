@@ -10,7 +10,8 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField] private GameObject[] resourcePrefabs;
 
     [Header("Moegliche Spawn-Positionen")]
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Transform spawnParent;
+    private List<Transform> spawnPoints = new List<Transform>();
 
     [Header("Einstellungen")]
     [SerializeField] private float spawnInterval = 4f;
@@ -19,9 +20,15 @@ public class ResourceSpawner : MonoBehaviour
     private float timer;
 
     // Speichert, welche SpawnPoints belegt sind
-    private Dictionary<Transform, GameObject> occupiedPoints =
-        new Dictionary<Transform, GameObject>();
+    private Dictionary<Transform, GameObject> occupiedPoints = new Dictionary<Transform, GameObject>();
 
+    private void Awake()
+    {
+        foreach (Transform child in spawnParent)
+        {
+            spawnPoints.Add(child);
+        }
+    }
     private void Start()
     {
         CheckForNullables();
@@ -41,7 +48,7 @@ public class ResourceSpawner : MonoBehaviour
     private void SpawnResource()
     {
         if (resourcePrefabs.Length == 0 ||
-            spawnPoints.Length == 0)
+            spawnPoints.Count == 0)
             return;
 
         List<Transform> freePoints = new List<Transform>();
