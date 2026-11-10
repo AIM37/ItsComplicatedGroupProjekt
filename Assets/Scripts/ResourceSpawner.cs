@@ -1,7 +1,5 @@
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ResourceSpawner : MonoBehaviour
@@ -17,9 +15,10 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval = 4f;
     [SerializeField] private int maxResources = 12;
 
+    private List<GameObject> objectPool = new List<GameObject>();
+
     private float timer;
 
-    // Speichert, welche SpawnPoints belegt sind
     private Dictionary<Transform, GameObject> occupiedPoints = new Dictionary<Transform, GameObject>();
 
     private void Awake()
@@ -29,9 +28,25 @@ public class ResourceSpawner : MonoBehaviour
             spawnPoints.Add(child);
         }
     }
+
     private void Start()
     {
         CheckForNullables();
+        CreateObjectPool();
+    }
+
+    private void CreateObjectPool()
+    {
+        foreach (GameObject prefab in resourcePrefabs)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject newObj = Instantiate(prefab);
+                newObj.name = prefab.name;
+                newObj.SetActive(false);
+                objectPool.Add(newObj);
+            }
+        }
     }
 
     private void Update()
@@ -47,46 +62,66 @@ public class ResourceSpawner : MonoBehaviour
 
     private void SpawnResource()
     {
-        if (resourcePrefabs.Length == 0 ||
-            spawnPoints.Count == 0)
+        if (resourcePrefabs.Length == 0 || spawnPoints.Count == 0)
             return;
 
         List<Transform> freePoints = new List<Transform>();
+        int activeItemsOnFloor = 0;
 
-        // Nur freie SpawnPoints sammeln
         foreach (Transform point in spawnPoints)
         {
-            if (point == null)
-                continue;
+            if (point == null) continue;
 
             if (!occupiedPoints.ContainsKey(point) ||
-                occupiedPoints[point] == null)
+                occupiedPoints[point] == null ||
+                !occupiedPoints[point].activeSelf)
             {
                 freePoints.Add(point);
             }
+            else
+            {
+                activeItemsOnFloor++;
+            }
         }
 
-        if (freePoints.Count == 0)
+        if (freePoints.Count == 0 || activeItemsOnFloor >= maxResources)
             return;
 
-        if (occupiedPoints.Count >= maxResources)
-            return;
+        Transform spawnPoint = freePoints[UnityEngine.Random.Range(0, freePoints.Count)];
 
-        // Zufaelligen freien Punkt auswaehlen
-        Transform spawnPoint =
-            freePoints[UnityEngine.Random.Range(0, freePoints.Count)];
+        GameObject resource = GetFreeItemFromPool();
+        if (resource == null) return;
 
-        GameObject prefab =
-            resourcePrefabs[UnityEngine.Random.Range(0, resourcePrefabs.Length)];
-
-        GameObject resource = Instantiate(
-            prefab,
-            spawnPoint.position,
-            Quaternion.identity
-        );
+        resource.transform.position = spawnPoint.position;
+        resource.SetActive(true);
 
         occupiedPoints[spawnPoint] = resource;
     }
+
+    private GameObject GetFreeItemFromPool()
+    {
+        List<GameObject> inactiveItems = new List<GameObject>();
+
+        foreach (GameObject item in objectPool)
+        {
+            if (!item.activeSelf)
+            {
+                inactiveItems.Add(item);
+            }
+        }
+
+        if (inactiveItems.Count == 0)
+            return null;
+
+        int randomIndex = UnityEngine.Random.Range(0, inactiveItems.Count);
+        return inactiveItems[randomIndex];
+    }
+
+    public void IncreaseSpawnTime(float extraSeconds)
+    {
+        spawnInterval += extraSeconds;
+    }
+
     private void CheckForNullables()
     {
         if (resourcePrefabs == null) throw new InvalidOperationException(nameof(resourcePrefabs) + " fehlt");
