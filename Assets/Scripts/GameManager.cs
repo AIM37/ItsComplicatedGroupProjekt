@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CheckForNullables();
+    }
+
+    private void Update()
+    {
         UpdateUI();
     }
 
@@ -62,8 +66,6 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Spielzeug: " + toys +
                   " | Essen: " + food);
-
-        UpdateUI();
     }
 
     public bool GiveToChild(int childNumber)
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
         {
             toys--;
             child1 = Mathf.Min(100, child1 + 15);
-            UpdateUI();
+            
             return true;
         }
 
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             food--;
             child2 = Mathf.Min(100, child2 + 15);
-            UpdateUI();
+            
             return true;
         }
 
@@ -94,14 +96,11 @@ public class GameManager : MonoBehaviour
 
         if (childNumber == 2)
             child2 = Mathf.Max(0, child2 - 5);
-
-        UpdateUI();
     }
 
     public void AddStress(int amount)
     {
         stress = Mathf.Clamp(stress + amount, 0, 100);
-        UpdateUI();
     }
 
     public void ChangeRelationship(
@@ -112,10 +111,8 @@ public class GameManager : MonoBehaviour
         child1 = Mathf.Clamp(child1 + child1Change, 0, 100);
         child2 = Mathf.Clamp(child2 + child2Change, 0, 100);
         partner = Mathf.Clamp(partner + partnerChange, 0, 100);
-        UpdateUI();
     }
 
-    //UpdateUI kann maybe in eine Update Funktion und muss dann nicht immer wieder in jeder funktion aufgerufen werden
     private void UpdateUI()
     {
         stressSlider.value = stress;
