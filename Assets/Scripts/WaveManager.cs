@@ -1,14 +1,23 @@
-
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Wave 1")]
+    [Header("Wave Einstellungen")]
+    [SerializeField] private int maxWaves = 5;
     [SerializeField] private float waveDuration = 60f;
     [SerializeField] private float stressInterval = 10f;
     [SerializeField] private int stressIncrease = 5;
+
+    [Header("Steigende Schwierigkeit pro Welle (Owner 2 Wave Curve)")]
+    [SerializeField] private float extraDurationPerWave = 10f;
+    [SerializeField] private int extraStressPerWave = 2;
+    [SerializeField] private float extraExSpeedPerWave = 0.4f;
+    [SerializeField] private int extraExDamagePerWave = 3;
+    [SerializeField] private float extraSpawnDelayPerWave = 0.4f;
 
     [Header("UI")]
     [SerializeField] private TMP_Text timerText;
@@ -19,9 +28,11 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private ResourceSpawner resourceSpawner;
     [SerializeField] private ExPartnerAI exPartner;
 
+    private int currentWave = 1;
     private float timeLeft;
     private float stressTimer = 0f;
     private bool waveRunning = true;
+    private bool lastWaveWon = false;
 
     private void Start()
     {
@@ -31,7 +42,7 @@ public class WaveManager : MonoBehaviour
         Time.timeScale = 1f;
 
         resultText.gameObject.SetActive(false);
-        waveText.text = "1 / 5";
+        waveText.text = currentWave + " / " + maxWaves;
 
         UpdateTimer();
     }
@@ -39,63 +50,101 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         if (!waveRunning)
+        {
+            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                if (lastWaveWon && currentWave < maxWaves)
+                {
+                    StartNextWave();
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+            }
             return;
+        }
 
         timeLeft -= Time.deltaTime;
         stressTimer += Time.deltaTime;
 
-        // Stress steigt automatisch
         if (stressTimer >= stressInterval)
         {
             stressTimer -= stressInterval;
-
-            GameManager.Instance.AddStress(
-                stressIncrease
-            );
+            GameManager.Instance.AddStress(stressIncrease);
         }
 
         UpdateTimer();
 
-        // Zuerst prüfen, ob der Spieler verloren hat
         if (GameManager.Instance.ReturnStress() >= 100)
         {
             EndWave(false);
             return;
         }
 
-        // Zeit abgelaufen = gewonnen
         if (timeLeft <= 0f)
         {
             EndWave(true);
         }
     }
 
+    private void StartNextWave()
+    {
+        currentWave++;
+
+        waveDuration += extraDurationPerWave;
+        stressIncrease += extraStressPerWave;
+        exPartner.IncreaseDifficulty(extraExSpeedPerWave, extraExDamagePerWave);
+        resourceSpawner.IncreaseSpawnTime(extraSpawnDelayPerWave);
+
+        GameManager.Instance.AddStress(-15);
+
+        timeLeft = waveDuration;
+        stressTimer = 0f;
+        waveRunning = true;
+
+        resultText.gameObject.SetActive(false);
+        waveText.text = currentWave + " / " + maxWaves;
+
+        resourceSpawner.enabled = true;
+        exPartner.enabled = true;
+        Time.timeScale = 1f;
+
+        UpdateTimer();
+    }
+
     void UpdateTimer()
     {
-        int seconds = Mathf.CeilToInt(
-            Mathf.Max(0f, timeLeft)
-        );
-
+        int seconds = Mathf.CeilToInt(Mathf.Max(0f, timeLeft));
         int minutes = seconds / 60;
         int remainingSeconds = seconds % 60;
 
-        timerText.text =
-            $"{minutes:00}:{remainingSeconds:00}";
+        timerText.text = $"{minutes:00}:{remainingSeconds:00}";
     }
 
     void EndWave(bool won)
     {
         waveRunning = false;
+        lastWaveWon = won;
         resultText.gameObject.SetActive(true);
 
-        resultText.text = won
-            ? "WAVE 1 COMPLETE!"
-            : "GAME OVER!\nTOO MUCH STRESS!";
+        if (!won)
+        {
+            resultText.text = "GAME OVER!\nTOO MUCH STRESS!\n[LEERTASTE] = Neustart";
+        }
+        else if (currentWave < maxWaves)
+        {
+            resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
+        }
+        else
+        {
+            resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
+        }
 
         resourceSpawner.enabled = false;
         exPartner.enabled = false;
 
-        // Spiel anhalten
         Time.timeScale = 0f;
     }
 
