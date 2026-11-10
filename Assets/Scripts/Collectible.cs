@@ -1,6 +1,6 @@
-
 using UnityEngine;
 
+//Sehr fragile Klasse,
 public class Collectible : MonoBehaviour
 {
     public enum ResourceType
@@ -17,11 +17,9 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.Collect(
-                resourceType.ToString()
-            );
+            GameManager.Instance.Collect(gameObject);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false); //Nicht sauber, mach ich später besser
         }
     }
 }

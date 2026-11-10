@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "Child", menuName = "Scriptable Objects/Child")]
 public class Child : ScriptableObject
@@ -21,10 +22,13 @@ public class Child : ScriptableObject
             {
                 need.intervaltimer = 0f;
 
-                //Mit dem Team besprechen, ob wir solche Zeilenumbrüche lassen.
-                need.currentStat = Mathf.Max(0, need.currentStat - 5);
+                need.currentStat = Mathf.Max(0f, need.currentStat - 5f);
 
-                Debug.Log(childName + " braucht Aufmerksamkeit!");
+                Debug.Log(childName + " braucht Aufmerksamkeit! Der Wert ist" + need.currentStat);
+            }
+            if (need.giveTimer > 0f)
+            {
+                need.giveTimer -= Time.deltaTime;
             }
         }
     }
@@ -34,8 +38,21 @@ public class Child : ScriptableObject
 public class ChildNeed
 {
     public GameObject neededItem;
-    public float currentStat;
+    [SerializeField][Range(0, 100)] private float defaultCurrentStat = 60f;
+    [HideInInspector] [Range(0, 100)] public float currentStat;
     public float intervalStat;
-    public float maxStat;
-    public float intervaltimer = 0f;
+    [HideInInspector] public float intervaltimer = 0f;
+    [HideInInspector] public float giveTimer = 0f;
+
+    public void SatisfyNeed()
+    {
+        giveTimer = 1f;
+        Debug.Log("Der Wille wurde erfüllt " + neededItem.name + " beträgt " + currentStat);
+        currentStat = Mathf.Max(0f, currentStat + 5f);
+    }
+
+    public float GiveDefaultCurrentStat()
+    {
+        return defaultCurrentStat;
+    }
 }
