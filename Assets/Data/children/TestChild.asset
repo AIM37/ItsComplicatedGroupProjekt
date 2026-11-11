@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: TestChild
   m_EditorClassIdentifier: Assembly-CSharp::Child
   childName: Gisela
-  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: -4034812498382643234, guid: 28c634bf0dbfa5948b931c90de9c1e14, type: 3}
   position: {x: -5.36, y: -0.8857}
   wantedItems:
   - neededItem: {fileID: 1863340948859505573, guid: 32ee1c1a73b104dd39697b4676bb1070, type: 3}
     defaultCurrentStat: 50
-    currentStat: 5
+    currentStat: 25
     intervalStat: 5
-    intervaltimer: 4.089338
-    giveTimer: -0.0012747548
+    intervaltimer: 2.5556567
+    giveTimer: -0.0004719668
+  - neededItem: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
+    defaultCurrentStat: 50
+    currentStat: 40
+    intervalStat: 5
+    intervaltimer: 2.5556567
+    giveTimer: -0.00016385363

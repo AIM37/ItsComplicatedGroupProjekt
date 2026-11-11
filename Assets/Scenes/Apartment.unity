@@ -1059,12 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerManager: {fileID: 1723379660}
-  partner: 60
-  stressSlider: {fileID: 1301247749}
-  child1Slider: {fileID: 1669465524}
-  child2Slider: {fileID: 1462342303}
-  partnerSlider: {fileID: 887543568}
-  moneyText: {fileID: 468688231}
+  childManager: {fileID: 381454908}
 --- !u!1 &587729258
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,6 +2850,7 @@ MonoBehaviour:
   stressDamage: 15
   damageCooldown: 1
   originalPlayer: {fileID: 2038346341}
+  currentState: 0
 --- !u!50 &1125293339
 Rigidbody2D:
   serializedVersion: 5
@@ -4156,9 +4152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62700bc6400a94048b8dea16d5b7e77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  maxWaves: 5
   waveDuration: 60
   stressInterval: 10
   stressIncrease: 5
+  extraDurationPerWave: 10
+  extraStressPerWave: 2
+  extraExSpeedPerWave: 0.4
+  extraExDamagePerWave: 3
+  extraSpawnDelayPerWave: 0.4
   timerText: {fileID: 2058657812}
   waveText: {fileID: 2131362755}
   resultText: {fileID: 1535604290}
