@@ -34,6 +34,11 @@ public class ChildManager : MonoBehaviour
         }
     }
 
+    public List<Child> GetChildList()
+    {
+        return childern;
+    }
+
     public void GiveToChild(Child child)
     {
         foreach (Child realChild in childern)

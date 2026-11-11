@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Momentaner Stres:" + stress);
     }
 
-    public int ReturnStress()
+    public int GetStress()
     {
         return stress;
     }
