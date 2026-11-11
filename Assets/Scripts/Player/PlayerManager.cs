@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField][Range(0, 100)] private int stress = 50;
+    private const int MaxStress = 100;
+    [SerializeField][Range(0, MaxStress)] private int stress = 50;
     [SerializeField] private Inventory inventory;
 
     public void Collect(GameObject resource)
@@ -14,7 +15,6 @@ public class PlayerManager : MonoBehaviour
                 break;
             case "Health":
                 AddStress(-10);
-                Debug.Log("Stress ist " + stress);
                 break;
             default:
                 inventory.AddItem(resource);
@@ -26,12 +26,16 @@ public class PlayerManager : MonoBehaviour
     public void AddStress(int amount)
     {
         stress = Mathf.Clamp(stress + amount, 0, 100);
-        Debug.Log("Momentaner Stres:" + stress);
     }
 
     public int GetStress()
     {
         return stress;
+    }
+
+    public int GetMaxStress()
+    {
+        return MaxStress;
     }
 
     public Inventory GetInventory()

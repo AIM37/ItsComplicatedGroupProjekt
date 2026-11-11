@@ -34,6 +34,21 @@ public class ChildManager : MonoBehaviour
         }
     }
 
+    public bool CheckForSadChild()
+    {
+        foreach(Child child in childern)
+        {
+            foreach(ChildNeed need in child.wantedItems)
+            {
+                if (need.currentStat <= 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public List<Child> GetChildList()
     {
         return childern;
@@ -53,7 +68,6 @@ public class ChildManager : MonoBehaviour
                         if (need.neededItem.name == item.name.Replace("(Clone)", "").Trim()) //Das später schöner mit einer ID oder so machen
                         {
                             need.SatisfyNeed();
-                            Debug.Log(need.neededItem.name + " abgegeben");
                             GameManager.Instance.GetInventory().RemoveItem(item);
                             break;
                         }

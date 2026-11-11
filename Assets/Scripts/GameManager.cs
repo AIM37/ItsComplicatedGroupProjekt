@@ -79,9 +79,9 @@ public class GameManager : MonoBehaviour
 
 
         //Das ist nur wichtig für den Debug Display
-        string childrenText = string.Join("   ",
+        string childrenText = string.Join("",
             childManager.GetChildList().Select(child =>
-                $"{child.childName}: " +
+                $"     {child.childName}: " +
                 string.Join(", ",
                     child.wantedItems.Select(need =>
                         $"{need.neededItem.name} ({need.currentStat})"))
@@ -101,9 +101,14 @@ public class GameManager : MonoBehaviour
         partner = Mathf.Clamp(partner + partnerChange, 0, 100);*/
     }
 
-    public int ReturnStress()
+    public int GetStress()
     {
         return playerManager.GetStress();
+    }
+
+    public int GetMaxStress()
+    {
+        return playerManager.GetMaxStress();
     }
 
     public Inventory GetInventory()
@@ -111,8 +116,16 @@ public class GameManager : MonoBehaviour
         return playerManager.GetInventory();
     }
 
+    public bool CheckForSadChild()
+    {
+        if (childManager.CheckForSadChild()) return true;
+        return false;
+    }
+
     private void CheckForNullables()
     {
+        if (playerManager == null) throw new InvalidOperationException(nameof(playerManager) + " fehlt");
+        if (childManager == null) throw new InvalidOperationException(nameof(childManager) + " fehlt");
         /*if (stressSlider == null) throw new InvalidOperationException(nameof(stressSlider) + " fehlt");
         if (child1Slider == null) throw new InvalidOperationException(nameof(child1Slider) + " fehlt");
         if (child2Slider == null) throw new InvalidOperationException(nameof(child2Slider) + " fehlt");

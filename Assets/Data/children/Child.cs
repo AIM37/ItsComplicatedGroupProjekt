@@ -23,8 +23,6 @@ public class Child : ScriptableObject
                 need.intervaltimer = 0f;
 
                 need.currentStat = Mathf.Max(0f, need.currentStat - 5f);
-
-                Debug.Log(childName + " braucht Aufmerksamkeit! Der Wert ist" + need.currentStat);
             }
             if (need.giveTimer > 0f)
             {
@@ -47,7 +45,6 @@ public class ChildNeed
     public void SatisfyNeed()
     {
         giveTimer = 1f;
-        Debug.Log("Der Wille wurde erfüllt " + neededItem.name + " beträgt " + currentStat);
         currentStat = Mathf.Max(0f, currentStat + 5f);
     }
 

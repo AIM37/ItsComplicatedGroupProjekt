@@ -77,7 +77,7 @@ public class WaveManager : MonoBehaviour
 
         UpdateTimer();
 
-        if (GameManager.Instance.ReturnStress() >= 100)
+        if (LostWave())
         {
             EndWave(false);
             return;
@@ -87,6 +87,14 @@ public class WaveManager : MonoBehaviour
         {
             EndWave(true);
         }
+    }
+
+    private bool LostWave()
+    {
+        if (GameManager.Instance.GetStress() >= GameManager.Instance.GetMaxStress()) return true;
+        if (GameManager.Instance.CheckForSadChild()) return true;
+
+        return false;
     }
 
     private void StartNextWave()
@@ -131,7 +139,7 @@ public class WaveManager : MonoBehaviour
 
         if (!won)
         {
-            resultText.text = "GAME OVER!\nTOO MUCH STRESS!\n[LEERTASTE] = Neustart";
+            resultText.text = "GAME OVER!\nTOO MUCH STRESS!\n[LEERTASTE] = Neustart"; //rein schreiben dass man auch durch Kinder sterben kann
         }
         else if (currentWave < maxWaves)
         {
