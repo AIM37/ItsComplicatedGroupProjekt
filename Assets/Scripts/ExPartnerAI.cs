@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExPartnerAI : MonoBehaviour
 {
-    // Unsere 3 Zustände für die Finite State Machine (Vorlesung Game Mechanics!)
+    // Die drei zustände
     public enum State
     {
         Patrol,
@@ -20,7 +20,7 @@ public class ExPartnerAI : MonoBehaviour
     [SerializeField] private float damageCooldown = 2f;
     [SerializeField] private GameObject originalPlayer;
 
-    // Zeigt den aktuellen Zustand live im Inspector an
+    // Zeigt den Zustand in dem Inspktor an
     [SerializeField] private State currentState = State.Patrol;
 
     private Rigidbody2D rb;
@@ -43,7 +43,7 @@ public class ExPartnerAI : MonoBehaviour
             normalColor = spriteRenderer.color;
         }
 
-        // Verhindert, dass sich die Figur bei Wandkontakt wegdreht
+        // behält den Blickkontakt und dreht sich nicht weg
         rb.freezeRotation = true;
 
         ChooseNewDirection();
@@ -51,7 +51,7 @@ public class ExPartnerAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // --- SCHRITT 1: Prüfen, ob der Spieler in Sichtweite ist ---
+        // sucht Spieler ob er in reichweite ist
         Vector2 toPlayer = (Vector2)player.position - rb.position;
         float distance = toPlayer.magnitude;
 
@@ -63,15 +63,15 @@ public class ExPartnerAI : MonoBehaviour
 
         bool canSeePlayer = (distance < detectionRange) && !wallBetween;
 
-        // --- SCHRITT 2: Zustand wechseln (State Machine Übergänge) ---
+        // checkt den state von Ex
         if (currentState == State.Pause)
         {
-            // Solange die Pause noch läuft: stehenbleiben!
+            // ist er gerade in der pause?
             if (Time.time < pauseEndTime)
             {
                 return;
             }
-            // Pause vorbei -> zurück auf Streife (Patrol)
+            // wenn pause vorbei ist dann wieder in Patrol
             currentState = State.Patrol;
         }
         else if (canSeePlayer)
@@ -83,7 +83,7 @@ public class ExPartnerAI : MonoBehaviour
             currentState = State.Patrol;
         }
 
-        // --- SCHRITT 3: Verhalten je nach Zustand ausführen ---
+        // state ausführen
         Vector2 moveDirection = direction;
         float currentSpeed = moveSpeed;
 
@@ -100,7 +100,6 @@ public class ExPartnerAI : MonoBehaviour
                 break;
 
             case State.Chase:
-                // Visuelles Feedback: Wird knallrot und 20 % schneller!
                 if (spriteRenderer != null) spriteRenderer.color = Color.red;
 
                 moveDirection = toPlayer.normalized;
@@ -108,8 +107,7 @@ public class ExPartnerAI : MonoBehaviour
                 break;
         }
 
-        // --- SCHRITT 4: Hindernis-Prüfung mit CircleCast (statt dünnem Raycast!) ---
-        // Prüft mit einem Kreis (Radius 0.35), ob direkt vor der Figur eine Wand oder ein Möbelstück ist
+        // schaut ob der body vom ex collidet
         bool blocked = Physics2D.CircleCast(
             rb.position,
             0.35f,
@@ -120,12 +118,13 @@ public class ExPartnerAI : MonoBehaviour
 
         if (blocked)
         {
-            // Neue Richtung würfeln und sofort in diese Ausweichrichtung weitergehen (kein Einfrieren!)
+
+
             ChooseNewDirection();
             moveDirection = direction;
         }
 
-        // Figur bewegen
+// bewegt spieler
         rb.MovePosition(
             rb.position + moveDirection * currentSpeed * Time.fixedDeltaTime
         );
@@ -133,7 +132,7 @@ public class ExPartnerAI : MonoBehaviour
 
     private void ChooseNewDirection()
     {
-        // Probiert bis zu 8 zufällige Richtungen aus und nimmt die erste, die frei ist!
+        // probiert 8 richtungen aus um eine freie zu finden
         for (int i = 0; i < 8; i++)
         {
             float angle = UnityEngine.Random.Range(0f, 360f);
@@ -158,7 +157,7 @@ public class ExPartnerAI : MonoBehaviour
             }
         }
 
-        // Falls alle Richtungen eng sind: einfach umdrehen
+        // wenn alle blockiert sind dann einmal umdrehen
         direction = -direction;
         changeDirectionTime = Time.time + 1f;
     }
@@ -171,7 +170,6 @@ public class ExPartnerAI : MonoBehaviour
         }
         else
         {
-            // Bei Kontakt mit Wand oder Möbel sofort neue Richtung wählen!
             ChooseNewDirection();
         }
     }
