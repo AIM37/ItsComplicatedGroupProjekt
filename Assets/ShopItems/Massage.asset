@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItem
   itemName: Massage
   price: 50
-  description: 
+  description: Eine Massage die dich entspannt und deinen Stress reduziert
   icon: {fileID: 0}
-  effectStrength: 0
-  effectDuration: 0
+  effect: {fileID: 0}
   deliveryPrefab: {fileID: 0}
