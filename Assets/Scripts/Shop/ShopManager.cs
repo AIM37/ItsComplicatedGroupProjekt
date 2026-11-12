@@ -1,12 +1,11 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour
 
 {
 
     private Inventory inventory;
-    private Dictionary<UpgradeItem, int> upgradeLevels = new Dictionary<UpgradeItem, int>();
+    [SerializeField] private DeliveryManager deliveryManager;
 
     private void Start()
     {
@@ -31,16 +30,23 @@ public class ShopManager : MonoBehaviour
         {
             if (consumable.deliveryPrefab == null)
             {
-                Debug.LogWarning("Für dieses Item fehlt ein Liefer-Prefab!");
+                Debug.LogWarning("Liefer-Prefab fehlt!");
                 return;
             }
-            Debug.Log("Verbrauchsitem ausgewählt: " + consumable.itemName);
-        } 
+
+            if (deliveryManager == null)
+            {
+                Debug.LogWarning("DeliveryManager fehlt!");
+                return;
+            }
+
+            inventory.RemoveMoney(item.price);
+            deliveryManager.Deliver(consumable.deliveryPrefab);
+        }
         else if (item is UpgradeItem upgrade)
         {
             Debug.Log("Upgrade ausgewählt: " + upgrade.itemName);
         }
-
     }
 
 }
