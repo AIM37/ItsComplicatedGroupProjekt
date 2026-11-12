@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class WallManager : MonoBehaviour
 {
-    private int obstacleLayer = LayerMask.NameToLayer("Obstacle");
+    private int obstacleLayer;
 
     private void Awake()
     {
+        obstacleLayer = LayerMask.NameToLayer("Obstacle");
         AddColliders(transform);
     }
 
