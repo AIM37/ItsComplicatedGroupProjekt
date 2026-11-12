@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text resultText;
+    [SerializeField] private GameObject gameoverText;
 
     [Header("Andere Systeme")]
     [SerializeField] private ResourceSpawner resourceSpawner;
@@ -33,7 +34,6 @@ public class WaveManager : MonoBehaviour
     private float stressTimer = 0f;
     private bool waveRunning = true;
     private bool lastWaveWon = false;
-    private string loseText = string.Empty;
 
     private void Start()
     {
@@ -92,16 +92,8 @@ public class WaveManager : MonoBehaviour
 
     private bool LostWave()
     {
-        if (GameManager.Instance.GetStress() >= GameManager.Instance.GetMaxStress())
-        {
-            loseText = "TOO MUCH STRESS!";
-            return true; 
-        }
-        if (GameManager.Instance.CheckForSadChild()) 
-        {
-            loseText = "YOUR CHILDERN ARE TOO SAD";
-            return true;
-        }
+        if (GameManager.Instance.GetStress() >= GameManager.Instance.GetMaxStress())return true; 
+        if (GameManager.Instance.CheckForSadChild())return true;
 
         return false;
     }
@@ -147,7 +139,7 @@ public class WaveManager : MonoBehaviour
 
         if (!won)
         {
-            resultText.text = $"GAME OVER!\n{loseText}\n[LEERTASTE] = Neustart"; //rein schreiben dass man auch durch Kinder sterben kann
+            gameoverText.SetActive(true);
         }
         else if (currentWave < maxWaves)
         {

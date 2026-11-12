@@ -18,14 +18,14 @@ MonoBehaviour:
   scale: 0.18
   wantedItems:
   - neededItem: {fileID: 1863340948859505573, guid: 32ee1c1a73b104dd39697b4676bb1070, type: 3}
-    defaultCurrentStat: 50
-    currentStat: 40
-    intervalStat: 15
-    intervaltimer: 1.4088504
-    giveTimer: -0.0020552098
+    defaultCurrentStat: 70
+    currentStat: 65
+    intervalStat: 10
+    intervaltimer: 3.0261452
+    giveTimer: -0.000620559
   - neededItem: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
-    defaultCurrentStat: 50
-    currentStat: 40
-    intervalStat: 15
-    intervaltimer: 4.186335
-    giveTimer: -0.002548942
+    defaultCurrentStat: 70
+    currentStat: 70
+    intervalStat: 10
+    intervaltimer: 5.6349506
+    giveTimer: -0.00059423177
