@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c5dd7ddd4c642c895cc5053def8a07, type: 3}
   m_Name: NeusesSpielzeug
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItem
-  itemName: 
-  price: 0
-  description: 
+  itemName: ' Neuses Spielzeug'
+  price: 50
+  description: "Ein neues Spielzeug f\xFCr deine Kinder"
   icon: {fileID: 0}
-  effectStrength: 0
-  effectDuration: 0
+  effect: {fileID: 0}
   deliveryPrefab: {fileID: 0}

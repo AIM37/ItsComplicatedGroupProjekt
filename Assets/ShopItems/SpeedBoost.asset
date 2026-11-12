@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ce29ce14145494cacb6c440f4a9c1a, type: 3}
   m_Name: SpeedBoost
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeItem
-  itemName: 
+  itemName: SpeedBoost
   price: 60
   description: Spieler bewegt sich schneller
   icon: {fileID: 0}
-  upgradeAmount: 0
+  effect: {fileID: 0}
   maxLevel: 0
