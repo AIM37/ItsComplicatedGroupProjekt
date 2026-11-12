@@ -161,7 +161,7 @@ public class WaveManager : MonoBehaviour
         PauseGameplay();
     }
 
-    private void PauseGameplay()
+    public void PauseGameplay()
     {
         resourceSpawner.enabled = false;
         exPartner.enabled = false;
@@ -169,7 +169,7 @@ public class WaveManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private void ResumeGameplay()
+    public void ResumeGameplay()
     {
         resourceSpawner.enabled = true;
         exPartner.enabled = true;

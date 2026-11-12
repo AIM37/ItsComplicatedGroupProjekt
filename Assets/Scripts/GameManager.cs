@@ -107,6 +107,16 @@ public class GameManager : MonoBehaviour
         partner = Mathf.Clamp(partner + partnerChange, 0, 100);*/
     }
 
+    public void PauseGameplay()
+    {
+        waveManager.PauseGameplay();
+    }
+
+    public void ResumeGameplay()
+    {
+        waveManager.ResumeGameplay();
+    }
+
     public bool GetWaveRunning()
     {
         return waveManager.GetWaveRunning();

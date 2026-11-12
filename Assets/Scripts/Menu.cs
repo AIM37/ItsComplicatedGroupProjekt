@@ -23,6 +23,14 @@ public class Menu : MonoBehaviour
     {
         menuOpen = !menuScreen.activeSelf;
         menuScreen.SetActive(menuOpen);
+        if (menuOpen) 
+        {
+            GameManager.Instance.PauseGameplay();
+        }
+        else
+        {
+            GameManager.Instance.ResumeGameplay();
+        }
     }
 
 
@@ -35,5 +43,10 @@ public class Menu : MonoBehaviour
     public void EndGame()
     {
         Application.Quit();
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("StartGameScene");
     }
 }
