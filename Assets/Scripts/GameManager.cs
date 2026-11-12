@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private ChildManager childManager;
     [SerializeField] private WaveManager waveManager;
+    [SerializeField] private PhoneShopController phoneShopController;
+
 
     private bool currentlyRunning = false;
 
@@ -125,10 +127,20 @@ public class GameManager : MonoBehaviour
         return playerManager.GetInventory();
     }
 
+    public bool GetMovementAllowed()
+    {
+        if (phoneShopController.GetShopActive()) return false;
+        return true;
+    }
+
     public bool CheckForSadChild()
     {
         if (childManager.CheckForSadChild()) return true;
         return false;
+    }
+    public void DeactivateUnimportendUI()
+    {
+        if (phoneShopController.GetShopActive()) phoneShopController.ToggleShop();
     }
 
     private void CheckForNullables()

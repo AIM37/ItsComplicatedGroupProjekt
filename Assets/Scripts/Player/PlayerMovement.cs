@@ -17,21 +17,22 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         movement = Vector2.zero;
+        if (GameManager.Instance.GetMovementAllowed())
+        {
+            if (Keyboard.current == null) return;
 
-        if (Keyboard.current == null) return;
+            if (Keyboard.current.wKey.isPressed)
+                movement.y += 1;
 
-        if (Keyboard.current.wKey.isPressed)
-            movement.y += 1;
+            if (Keyboard.current.sKey.isPressed)
+                movement.y -= 1;
 
-        if (Keyboard.current.sKey.isPressed)
-            movement.y -= 1;
+            if (Keyboard.current.aKey.isPressed)
+                movement.x -= 1;
 
-        if (Keyboard.current.aKey.isPressed)
-            movement.x -= 1;
-
-        if (Keyboard.current.dKey.isPressed)
-            movement.x += 1;
-
+            if (Keyboard.current.dKey.isPressed)
+                movement.x += 1;
+        }
         movement = movement.normalized;
     }
 

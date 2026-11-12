@@ -5,12 +5,7 @@ public class PhoneShopController : MonoBehaviour
 {
     [SerializeField] private GameObject shopPanel;
 
-
-    private void Start()
-    {
-        shopPanel.SetActive(false);
-    }
-
+    private bool shopActiv = false;
     
     private void Update()
     {
@@ -21,8 +16,14 @@ public class PhoneShopController : MonoBehaviour
     }
 
 
-    private void ToggleShop()
+    public void ToggleShop()
     {
-        shopPanel.SetActive(!shopPanel.activeSelf);
+        shopActiv = !shopPanel.activeSelf;
+        shopPanel.SetActive(shopActiv);
+    }
+
+    public bool GetShopActive()
+    {
+        return shopActiv;
     }
 }

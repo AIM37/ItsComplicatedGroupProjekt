@@ -142,6 +142,7 @@ public class WaveManager : MonoBehaviour
 
     void EndWave(bool won)
     {
+        GameManager.Instance.DeactivateUnimportendUI();
         waveRunning = false;
         lastWaveWon = won;
         resultText.gameObject.SetActive(true);
