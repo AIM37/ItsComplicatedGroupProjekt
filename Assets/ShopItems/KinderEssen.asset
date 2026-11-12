@@ -17,4 +17,4 @@ MonoBehaviour:
   description: Stillt den Hunger eines Kindes.
   icon: {fileID: 0}
   effect: {fileID: 0}
-  deliveryPrefab: {fileID: 0}
+  deliveryPrefab: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
