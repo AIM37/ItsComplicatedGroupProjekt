@@ -1656,8 +1656,8 @@ Transform:
   - {fileID: 619877985}
   - {fileID: 2112422501}
   - {fileID: 58952937}
-  - {fileID: 2004772325}
   - {fileID: 1547130713}
+  - {fileID: 2004772325}
   - {fileID: 1682993355}
   - {fileID: 1384628616}
   - {fileID: 891008932}
@@ -5975,7 +5975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "00\u20AC\n"
+  m_text: "0\u20AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5aa09d35d407342428786bdc1b436bba, type: 2}
   m_sharedMaterial: {fileID: 1028961967341751011, guid: 5aa09d35d407342428786bdc1b436bba, type: 2}
@@ -8712,6 +8712,7 @@ MonoBehaviour:
   extraSpawnDelayPerWave: 0.4
   timerText: {fileID: 58952938}
   waveText: {fileID: 2004772326}
+  moneyText: {fileID: 1547130714}
   resultText: {fileID: 2092861053}
   gameoverText: {fileID: 1896861929}
   resourceSpawner: {fileID: 325647321}

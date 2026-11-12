@@ -22,6 +22,7 @@ public class WaveManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text resultText;
     [SerializeField] private GameObject gameoverText;
 
@@ -77,6 +78,7 @@ public class WaveManager : MonoBehaviour
         }
 
         UpdateTimer();
+        moneyText.text = $"{GameManager.Instance.GetMoney()}€";
 
         if (LostWave())
         {

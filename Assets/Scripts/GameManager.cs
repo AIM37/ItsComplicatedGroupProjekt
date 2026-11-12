@@ -132,6 +132,11 @@ public class GameManager : MonoBehaviour
         return playerManager.GetMaxStress();
     }
 
+    public int GetMoney()
+    {
+        return playerManager.GetInventory().GetMoney();
+    }
+
     public Inventory GetInventory()
     {
         return playerManager.GetInventory();
