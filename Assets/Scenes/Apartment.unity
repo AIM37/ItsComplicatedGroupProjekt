@@ -3409,7 +3409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &934595481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7604,6 +7604,7 @@ MonoBehaviour:
   timerText: {fileID: 58952938}
   waveText: {fileID: 2004772326}
   resultText: {fileID: 2092861053}
+  gameoverText: {fileID: 934595480}
   resourceSpawner: {fileID: 325647321}
   exPartner: {fileID: 1425442970}
 --- !u!4 &1941574503
