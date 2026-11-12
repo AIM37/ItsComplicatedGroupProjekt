@@ -2,23 +2,18 @@ using UnityEngine;
 
 public class WallManager : MonoBehaviour
 {
-    private int obstacleLayer;
+    private int obstacleLayer = LayerMask.NameToLayer("Obstacle");
 
     private void Awake()
     {
-        obstacleLayer = LayerMask.NameToLayer("Obstacle");
         AddColliders(transform);
     }
 
-    // Geht rekursiv durch alle Kinder und gibt jedem "echten" Objekt einen BoxCollider2D.
     private void AddColliders(Transform root)
     {
         foreach (Transform child in root)
         {
-            // Objekte mit Tag "NoCollision" (inkl. aller Kinder) überspringen
             if (child.CompareTag("NoCollision")) continue;
-
-            // Canvas-Objekte sind nur Container: selbst kein Collider, aber ihre Kinder behandeln
             if (child.GetComponent<Canvas>() != null)
             {
                 AddColliders(child);
