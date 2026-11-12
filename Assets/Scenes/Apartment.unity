@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 200228086}
   - component: {fileID: 200228085}
   m_Layer: 0
-  m_Name: ChilTitle
+  m_Name: ChildTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
