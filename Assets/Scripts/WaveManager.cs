@@ -124,9 +124,7 @@ public class WaveManager : MonoBehaviour
         resultText.gameObject.SetActive(false);
         waveText.text = currentWave + " / " + maxWaves;
 
-        resourceSpawner.enabled = true;
-        exPartner.enabled = true;
-        Time.timeScale = 1f;
+        ResumeGameplay();
 
         UpdateTimer();
     }
@@ -152,18 +150,30 @@ public class WaveManager : MonoBehaviour
             resultText.text = $"GAME OVER!\n{loseText}\n[LEERTASTE] = Neustart"; //rein schreiben dass man auch durch Kinder sterben kann
         }
         else if (currentWave < maxWaves)
-            {
-                resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
-            }
-            else
-            {
-                resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
-            }
+        {
+            resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
+        }
+        else
+        {
+            resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
+        }
 
+        PauseGameplay();
+    }
+
+    private void PauseGameplay()
+    {
         resourceSpawner.enabled = false;
         exPartner.enabled = false;
 
         Time.timeScale = 0f;
+    }
+
+    private void ResumeGameplay()
+    {
+        resourceSpawner.enabled = true;
+        exPartner.enabled = true;
+        Time.timeScale = 1f;
     }
 
     public bool GetWaveRunning()
