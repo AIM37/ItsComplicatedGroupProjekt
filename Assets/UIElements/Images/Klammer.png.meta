@@ -118,10 +118,10 @@ TextureImporter:
       name: Klammer_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 57
-        width: 81
-        height: 92
+        x: 206
+        y: 236
+        width: 312
+        height: 356
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
