@@ -1060,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerManager: {fileID: 1723379660}
   childManager: {fileID: 381454908}
+  waveManager: {fileID: 1519127701}
 --- !u!1 &587729258
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,7 +4473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386a0a312f4c69e41852528ed5dbbefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  stress: 50
+  stress: 25
   inventory: {fileID: 621180925}
 --- !u!1 &1768817741
 GameObject:
