@@ -23,7 +23,7 @@ public class ChildManager : MonoBehaviour
             newChild.AddComponent<ChildObject>().Init(child, this);
             newChild.transform.SetParent(transform, false);
             newChild.transform.localPosition = child.position;
-            newChild.transform.localScale = Vector3.one * 0.1f;
+            newChild.transform.localScale = new Vector3(child.scale, child.scale, 1f);
         }
     }
     private void Update()

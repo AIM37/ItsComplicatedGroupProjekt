@@ -9,6 +9,7 @@ public class Child : ScriptableObject
     public string childName;
     public Sprite sprite;
     public Vector2 position;
+    public float scale = 1f;
     public List<ChildNeed> wantedItems;
 
     public void UnofficialUpdate()
