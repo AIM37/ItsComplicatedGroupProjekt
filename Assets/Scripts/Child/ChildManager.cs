@@ -28,9 +28,12 @@ public class ChildManager : MonoBehaviour
     }
     private void Update()
     {
-        foreach (var child in childern)
+        if (GameManager.Instance.GetWaveRunning())
         {
-            child.UnofficialUpdate();
+            foreach (var child in childern)
+            {
+                child.UnofficialUpdate();
+            }
         }
     }
 

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private ChildManager childManager;
+    [SerializeField] private WaveManager waveManager;
+
+    private bool currentlyRunning = false;
 
     /*[Header("Beziehungen und Stress")]
     //Keine ahnung wo der Partner rein soll, aber der muss raus
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CheckForNullables();
+        currentlyRunning = true;
     }
 
     private void Update()
@@ -99,6 +103,11 @@ public class GameManager : MonoBehaviour
         /*child1 = Mathf.Clamp(child1 + child1Change, 0, 100);
         child2 = Mathf.Clamp(child2 + child2Change, 0, 100);
         partner = Mathf.Clamp(partner + partnerChange, 0, 100);*/
+    }
+
+    public bool GetWaveRunning()
+    {
+        return waveManager.GetWaveRunning();
     }
 
     public int GetStress()

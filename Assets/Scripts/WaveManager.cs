@@ -142,18 +142,23 @@ public class WaveManager : MonoBehaviour
             resultText.text = "GAME OVER!\nTOO MUCH STRESS!\n[LEERTASTE] = Neustart"; //rein schreiben dass man auch durch Kinder sterben kann
         }
         else if (currentWave < maxWaves)
-        {
-            resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
-        }
-        else
-        {
-            resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
-        }
+            {
+                resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
+            }
+            else
+            {
+                resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
+            }
 
         resourceSpawner.enabled = false;
         exPartner.enabled = false;
 
         Time.timeScale = 0f;
+    }
+
+    public bool GetWaveRunning()
+    {
+        return waveRunning;
     }
 
     private void CheckForNullables()
