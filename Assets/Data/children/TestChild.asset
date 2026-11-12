@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Child
   childName: Gisela
   sprite: {fileID: -5560626156054914150, guid: fb6f206cfe60c420f9f93d4225e0120f, type: 3}
-  position: {x: -5.36, y: -0.8857}
+  position: {x: -2.51, y: -1.72}
+  scale: 5
   wantedItems:
   - neededItem: {fileID: 1863340948859505573, guid: 32ee1c1a73b104dd39697b4676bb1070, type: 3}
     defaultCurrentStat: 50
     currentStat: 50
     intervalStat: 15
-    intervaltimer: 5.1637144
+    intervaltimer: 4.458915
     giveTimer: -0.0020552098
   - neededItem: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
     defaultCurrentStat: 50
     currentStat: 50
     intervalStat: 15
-    intervaltimer: 7.9368267
+    intervaltimer: 7.2355213
     giveTimer: -0.002548942
