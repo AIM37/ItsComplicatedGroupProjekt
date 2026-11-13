@@ -18,23 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private PhoneShopController phoneShopController;
 
-
-    private bool currentlyRunning = false;
-
-    /*[Header("Beziehungen und Stress")]
-    //Keine ahnung wo der Partner rein soll, aber der muss raus
-    [SerializeField] [UnityEngine.Range(0, 100)] private int partner = 60;
-
-    [Header("Statusbalken")]
-    //maybe diese Slider in eine Liste packen, damit wir uns nicht abhalten müssen
-    [SerializeField] private Slider stressSlider;
-    [SerializeField] private Slider child1Slider;
-    [SerializeField] private Slider child2Slider;
-    [SerializeField] private Slider partnerSlider;
-
-    [Header("Textanzeigen")]
-    [SerializeField] private TMP_Text moneyText; */
-
     private void Awake()
     {
         Instance = this;
@@ -43,12 +26,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CheckForNullables();
-        currentlyRunning = true;
     }
 
     private void Update()
     {
-        GiveAllValues();
+        //GiveAllValues();
     }
 
     public void Collect(GameObject resource)
@@ -62,11 +44,10 @@ public class GameManager : MonoBehaviour
     }
 
     
-
+    /*
     private void GiveAllValues()
     {
         int stress = playerManager.GetStress();
-        int money = playerManager.GetInventory().GetMoney();
         List<GameObject> inventoryItems = playerManager.GetInventory().GetInventoryList();
         List<Child> allChilds = childManager.GetChildList();
 
@@ -82,8 +63,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
-
         //Das ist nur wichtig für den Debug Display
         string childrenText = string.Join("",
             childManager.GetChildList().Select(child =>
@@ -95,17 +74,7 @@ public class GameManager : MonoBehaviour
 
         string inventoryText = string.Join("", playerManager.GetInventory().GetInventoryList().Select(item => $"{item.name}, "));
         Debug.Log($"Money: {money}  Stress: {stress} {childrenText} \n Inventar: {inventoryText}");
-    }
-
-    public void ChangeRelationship(
-        int child1Change,
-        int child2Change,
-        int partnerChange)
-    {
-        /*child1 = Mathf.Clamp(child1 + child1Change, 0, 100);
-        child2 = Mathf.Clamp(child2 + child2Change, 0, 100);
-        partner = Mathf.Clamp(partner + partnerChange, 0, 100);*/
-    }
+    }*/
 
     public void PauseGameplay()
     {
@@ -135,6 +104,26 @@ public class GameManager : MonoBehaviour
     public int GetMoney()
     {
         return playerManager.GetInventory().GetMoney();
+    }
+
+    //Muss Hardcoding geändert werden
+    public List<ChildNeed> GetChildValue1()
+    {
+        List<Child> allChilds = childManager.GetChildList();
+
+        //Das musst man machen, wenn man die einzelnen Bedürfnisse der Kinder braucht
+        foreach (Child child in allChilds)
+        {
+            List<ChildNeed> allNeedsOfChild = new List<ChildNeed>();
+            foreach (ChildNeed need in child.wantedItems)
+            {
+                allNeedsOfChild.Add(need);
+                //Den namen des gewollten Items bekommt man mit "need.neededItem.name;" und den Wert wie glücklich es ist mit "need.currentStat"
+
+            }
+            return allNeedsOfChild;
+        }
+        return null;
     }
 
     public Inventory GetInventory()

@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class WaveManager : MonoBehaviour
 {
+
     [Header("Wave Einstellungen")]
     [SerializeField] private int maxWaves = 5;
     [SerializeField] private float waveDuration = 60f;
@@ -19,10 +23,14 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int extraExDamagePerWave = 3;
     [SerializeField] private float extraSpawnDelayPerWave = 0.4f;
 
+    //Eigene UI Klasse erstellen
     [Header("UI")]
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private UnityEngine.UI.Slider stressSlider;
+    [SerializeField] private UnityEngine.UI.Slider toySlider;
+    [SerializeField] private UnityEngine.UI.Slider foodSlider;
     [SerializeField] private TMP_Text resultText;
     [SerializeField] private GameObject gameoverText;
 
@@ -46,6 +54,7 @@ public class WaveManager : MonoBehaviour
         resultText.gameObject.SetActive(false);
         waveText.text = currentWave + " / " + maxWaves;
 
+        SliderColors();
         UpdateTimer();
     }
 
@@ -78,7 +87,7 @@ public class WaveManager : MonoBehaviour
         }
 
         UpdateTimer();
-        moneyText.text = $"{GameManager.Instance.GetMoney()}€";
+        UpdateUI();
 
         if (LostWave())
         {
@@ -90,6 +99,22 @@ public class WaveManager : MonoBehaviour
         {
             EndWave(true);
         }
+    }
+
+    private void SliderColors()
+    {
+        stressSlider.fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+        toySlider.fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.blue;
+        foodSlider.fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+    }
+
+    private void UpdateUI()
+    {
+        moneyText.text = $"{GameManager.Instance.GetMoney()}€";
+        stressSlider.value = GameManager.Instance.GetStress();
+        List<ChildNeed> allNeeds = GameManager.Instance.GetChildValue1();
+        toySlider.value = allNeeds[0].currentStat;
+        foodSlider.value = allNeeds[1].currentStat;
     }
 
     private bool LostWave()
