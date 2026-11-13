@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: KinderEssen
   price: 10
   description: Stillt den Hunger eines Kindes.
-  icon: {fileID: 0}
+  icon: {fileID: -284969209620187102, guid: c13417ada0f904c7dbda167f2dd3e25b, type: 3}
   effect: {fileID: 0}
   deliveryPrefab: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
