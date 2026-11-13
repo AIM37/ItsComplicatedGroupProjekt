@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +32,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider stressSlider;
     [SerializeField] private UnityEngine.UI.Slider toySlider;
     [SerializeField] private UnityEngine.UI.Slider foodSlider;
+    [SerializeField] private TMP_Text toyCount;
+    [SerializeField] private TMP_Text foodCount;
     [SerializeField] private GameObject waveCompletet;
     [SerializeField] private GameObject gameoverText;
     [SerializeField] private GameObject gameCompleteText;
@@ -120,6 +123,9 @@ public class WaveManager : MonoBehaviour
         List<ChildNeed> allNeeds = GameManager.Instance.GetChildValue1();
         toySlider.value = allNeeds[0].currentStat;
         foodSlider.value = allNeeds[1].currentStat;
+        Inventory inventory = GameManager.Instance.GetInventory();
+        toyCount.text = $"{inventory.GetInventoryList().Count(x => x.name == "Toy")}x";
+        foodCount.text = $"{inventory.GetInventoryList().Count(x => x.name == "Food")}x";
     }
 
     private bool LostWave()
