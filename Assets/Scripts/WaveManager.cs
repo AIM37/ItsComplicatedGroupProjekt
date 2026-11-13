@@ -33,6 +33,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider foodSlider;
     [SerializeField] private GameObject waveCompletet;
     [SerializeField] private GameObject gameoverText;
+    [SerializeField] private GameObject gameCompleteText;
 
     [Header("Andere Systeme")]
     [SerializeField] private ResourceSpawner resourceSpawner;
@@ -177,7 +178,7 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            //resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
+            gameCompleteText.SetActive(true);
         }
 
         PauseGameplay();
