@@ -4708,7 +4708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemButton
   itemIcon: {fileID: 863285368}
-  shopManager: {fileID: 0}
+  shopManager: {fileID: 987935607}
   item: {fileID: 11400000, guid: e7b7160d0e3334e9a8e261e8f8d188fa, type: 2}
 --- !u!114 &1048772135
 MonoBehaviour:
