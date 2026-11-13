@@ -31,7 +31,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider stressSlider;
     [SerializeField] private UnityEngine.UI.Slider toySlider;
     [SerializeField] private UnityEngine.UI.Slider foodSlider;
-    [SerializeField] private TMP_Text resultText;
+    [SerializeField] private GameObject waveCompletet;
     [SerializeField] private GameObject gameoverText;
 
     [Header("Andere Systeme")]
@@ -51,7 +51,6 @@ public class WaveManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        resultText.gameObject.SetActive(false);
         waveText.text = currentWave + " / " + maxWaves;
 
         SliderColors();
@@ -64,15 +63,7 @@ public class WaveManager : MonoBehaviour
         {
             if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                if (lastWaveWon && currentWave < maxWaves)
-                {
-                    StartNextWave();
-                }
-                else
-                {
-                    Time.timeScale = 1f;
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                }
+                CheckIfLastWave();
             }
             return;
         }
@@ -98,6 +89,19 @@ public class WaveManager : MonoBehaviour
         if (timeLeft <= 0f)
         {
             EndWave(true);
+        }
+    }
+
+    public void CheckIfLastWave()
+    {
+        if (lastWaveWon && currentWave < maxWaves)
+        {
+            StartNextWave();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -140,7 +144,7 @@ public class WaveManager : MonoBehaviour
         stressTimer = 0f;
         waveRunning = true;
 
-        resultText.gameObject.SetActive(false);
+        waveCompletet.SetActive(false);
         waveText.text = currentWave + " / " + maxWaves;
 
         ResumeGameplay();
@@ -162,7 +166,6 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.DeactivateUnimportendUI();
         waveRunning = false;
         lastWaveWon = won;
-        resultText.gameObject.SetActive(true);
 
         if (!won)
         {
@@ -170,11 +173,11 @@ public class WaveManager : MonoBehaviour
         }
         else if (currentWave < maxWaves)
         {
-            resultText.text = "WAVE " + currentWave + " COMPLETE!\n[LEERTASTE] = Nächste Welle";
+            waveCompletet.SetActive(true);
         }
         else
         {
-            resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
+            //resultText.text = "ALL 5 WAVES COMPLETE!\nGEWONNEN!\n[LEERTASTE] = Neustart";
         }
 
         PauseGameplay();
@@ -204,7 +207,6 @@ public class WaveManager : MonoBehaviour
     {
         if (timerText == null) throw new InvalidOperationException(nameof(timerText) + " fehlt");
         if (waveText == null) throw new InvalidOperationException(nameof(waveText) + " fehlt");
-        if (resultText == null) throw new InvalidOperationException(nameof(resultText) + " fehlt");
         if (resourceSpawner == null) throw new InvalidOperationException(nameof(resourceSpawner) + " fehlt");
         if (exPartner == null) throw new InvalidOperationException(nameof(exPartner) + " fehlt");
     }
