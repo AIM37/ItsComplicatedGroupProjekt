@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: ' Neuses Spielzeug'
   price: 50
   description: "Ein neues Spielzeug f\xFCr deine Kinder"
-  icon: {fileID: 0}
+  icon: {fileID: 1059318159656107361, guid: 400d982fb15aa4b30bd3d53a3a288641, type: 3}
   effect: {fileID: 0}
-  deliveryPrefab: {fileID: 0}
+  deliveryPrefab: {fileID: 1863340948859505573, guid: 32ee1c1a73b104dd39697b4676bb1070, type: 3}
