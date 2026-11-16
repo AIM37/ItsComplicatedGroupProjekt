@@ -28,6 +28,19 @@ public class ShopManager : MonoBehaviour
 
         if (item is ConsumableItem consumable)
         {
+            if (consumable.applyImmediately)
+            {
+                if (consumable.effect == null)
+                {
+                    Debug.LogWarning("Item hat keinen Effekt!");
+                    return;
+                }
+            inventory.RemoveMoney(item.price);
+            consumable.effect.ApplyEffect(null);
+            Debug.Log(item.itemName + " wurde benutzt!");
+            return;
+            }
+
             if (consumable.deliveryPrefab == null)
             {
                 Debug.LogWarning("Liefer-Prefab fehlt!");

@@ -4,5 +4,6 @@ using UnityEngine;
 public class ConsumableItem : ShopItem
 {
     public GameObject deliveryPrefab;
+    public bool applyImmediately;
 
 }
