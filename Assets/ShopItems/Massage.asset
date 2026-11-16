@@ -16,5 +16,6 @@ MonoBehaviour:
   price: 50
   description: Eine Massage die dich entspannt und deinen Stress reduziert
   icon: {fileID: 0}
-  effect: {fileID: 0}
+  effect: {fileID: 11400000, guid: a0943f4e96f37419ba84b617d46df78f, type: 2}
   deliveryPrefab: {fileID: 0}
+  applyImmediately: 1

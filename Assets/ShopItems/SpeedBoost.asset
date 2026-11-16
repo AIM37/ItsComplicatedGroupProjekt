@@ -16,5 +16,5 @@ MonoBehaviour:
   price: 60
   description: Spieler bewegt sich schneller
   icon: {fileID: 0}
-  effect: {fileID: 0}
-  maxLevel: 0
+  effect: {fileID: 11400000, guid: a2445216c763c47709283fa885ab212a, type: 2}
+  maxLevel: 3
