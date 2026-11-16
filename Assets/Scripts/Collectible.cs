@@ -17,9 +17,10 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.Collect(gameObject);
 
-            gameObject.SetActive(false); //Nicht sauber, mach ich später besser
+             GameManager.Instance.Collect(gameObject);
+             
+             gameObject.SetActive(false); //Nicht sauber, mach ich später besser
         }
     }
 }
