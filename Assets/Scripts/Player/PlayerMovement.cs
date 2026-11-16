@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    private float speedMultiplier = 1f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -39,7 +40,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(
-            rb.position + movement * moveSpeed * Time.fixedDeltaTime
+            rb.position + movement * moveSpeed * speedMultiplier * Time.fixedDeltaTime
         );
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = Mathf.Max(0f, multiplier);
     }
 }

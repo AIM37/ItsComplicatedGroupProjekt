@@ -6,6 +6,8 @@ public class ShopManager : MonoBehaviour
 
     private Inventory inventory;
     [SerializeField] private DeliveryManager deliveryManager;
+    [SerializeField] private UpgradeManager upgradeManager;
+    [SerializeField] private PlayerMovement playerMovement;
 
     private void Start()
     {
@@ -58,8 +60,28 @@ public class ShopManager : MonoBehaviour
         }
         else if (item is UpgradeItem upgrade)
         {
-            Debug.Log("Upgrade ausgewählt: " + upgrade.itemName);
+            if (upgradeManager == null || playerMovement == null)
+            {
+                Debug.LogWarning("UpgradeManager oder PlayerMovement fehlt!");
+                return;
+            }
+            
+            if (upgrade.effect == null)
+            {
+                Debug.LogWarning("Upgrade hat keinen Effekt!");
+                return;
+            }
+            
+            if (upgradeManager.TryLevelUp(upgrade))
+            {
+                int level = upgradeManager.GetUpgradeLevel(upgrade);
+                inventory.RemoveMoney(upgrade.price);
+                upgrade.effect.ApplyEffect(playerMovement.gameObject, level);
+                Debug.Log(upgrade.itemName + " gekauft! Level: " + level);
+                }
         }
+
+
     }
 
 }
