@@ -12,12 +12,11 @@ public class WaveManager : MonoBehaviour
 {
 
     [Header("Wave Einstellungen")]
-    [SerializeField] private int maxWaves = 5;
     [SerializeField] private float waveDuration = 60f;
     [SerializeField] private float stressInterval = 10f;
     [SerializeField] private int stressIncrease = 5;
 
-    [Header("Steigende Schwierigkeit pro Welle (Owner 2 Wave Curve)")]
+    [Header("Steigende Schwierigkeit pro Welle")]
     [SerializeField] private float extraDurationPerWave = 10f;
     [SerializeField] private int extraStressPerWave = 2;
     [SerializeField] private float extraExSpeedPerWave = 0.4f;
@@ -36,7 +35,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TMP_Text foodCount;
     [SerializeField] private GameObject waveCompletet;
     [SerializeField] private GameObject gameoverText;
-    [SerializeField] private GameObject gameCompleteText;
 
     [Header("Andere Systeme")]
     [SerializeField] private ResourceSpawner resourceSpawner;
@@ -55,7 +53,7 @@ public class WaveManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        waveText.text = currentWave + " / " + maxWaves;
+        waveText.text = currentWave.ToString();
 
         SliderColors();
         UpdateTimer();
@@ -98,7 +96,7 @@ public class WaveManager : MonoBehaviour
 
     public void CheckIfLastWave()
     {
-        if (lastWaveWon && currentWave < maxWaves)
+        if (lastWaveWon)
         {
             StartNextWave();
         }
@@ -152,7 +150,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = true;
 
         waveCompletet.SetActive(false);
-        waveText.text = currentWave + " / " + maxWaves;
+        waveText.text = currentWave.ToString();
 
         ResumeGameplay();
 
@@ -178,13 +176,9 @@ public class WaveManager : MonoBehaviour
         {
             gameoverText.SetActive(true);
         }
-        else if (currentWave < maxWaves)
-        {
-            waveCompletet.SetActive(true);
-        }
         else
         {
-            gameCompleteText.SetActive(true);
+            waveCompletet.SetActive(true);
         }
 
         PauseGameplay();
