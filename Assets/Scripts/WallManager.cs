@@ -6,6 +6,12 @@ public class WallManager : MonoBehaviour
 
     private void Awake()
     {
+        SetupColliders();
+    }
+
+    [ContextMenu("Hitboxen im Editor erzeugen")]
+    private void SetupColliders()
+    {
         obstacleLayer = LayerMask.NameToLayer("Obstacle");
         AddColliders(transform);
     }
@@ -21,11 +27,10 @@ public class WallManager : MonoBehaviour
                 continue;
             }
 
-            if (child.GetComponent<BoxCollider2D>() == null)
+            if (child.GetComponent<Collider2D>() == null)
             {
                 BoxCollider2D box = child.gameObject.AddComponent<BoxCollider2D>();
 
-                // UI-Objekte: Collider an die Größe des RectTransforms anpassen
                 if (child is RectTransform rt)
                 {
                     box.size = rt.rect.size;
