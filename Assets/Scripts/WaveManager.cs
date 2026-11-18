@@ -12,12 +12,12 @@ public class WaveManager : MonoBehaviour
 {
 
     [Header("Wave Einstellungen")]
+    [Tooltip("Echte Sekunden, die ein kompletter 24h Tag sind")]
     [SerializeField] private float waveDuration = 60f;
     [SerializeField] private float stressInterval = 10f;
     [SerializeField] private int stressIncrease = 5;
 
     [Header("Steigende Schwierigkeit pro Welle")]
-    [SerializeField] private float extraDurationPerWave = 10f;
     [SerializeField] private int extraStressPerWave = 2;
     [SerializeField] private float extraExSpeedPerWave = 0.4f;
     [SerializeField] private int extraExDamagePerWave = 3;
@@ -137,8 +137,6 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         currentWave++;
-
-        waveDuration += extraDurationPerWave;
         stressIncrease += extraStressPerWave;
         exPartner.IncreaseDifficulty(extraExSpeedPerWave, extraExDamagePerWave);
         resourceSpawner.IncreaseSpawnTime(extraSpawnDelayPerWave);
@@ -159,11 +157,13 @@ public class WaveManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        int seconds = Mathf.CeilToInt(Mathf.Max(0f, timeLeft));
-        int minutes = seconds / 60;
-        int remainingSeconds = seconds % 60;
-
-        timerText.text = $"{minutes:00}:{remainingSeconds:00}";
+        float elapsed = waveDuration - timeLeft;
+        float dayProgress = Mathf.Clamp01(elapsed / waveDuration);
+        int totalMinutes = Mathf.FloorToInt(dayProgress * 24f * 60f);
+        totalMinutes = totalMinutes / 15 * 15;
+        int hours = totalMinutes / 60;     // ganze Stunden
+        int minutes = totalMinutes % 60;   // Rest-Minuten
+        timerText.text = $"{hours:00}:{minutes:00}";
     }
 
     void EndWave(bool won)
