@@ -13727,10 +13727,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   maxWaves: 5
   waveDuration: 60
-  stressInterval: 10
-  stressIncrease: 5
+  stressInterval: 15
+  stressIncrease: 1
   extraDurationPerWave: 10
-  extraStressPerWave: 2
+  extraStressPerWave: 1
   extraExSpeedPerWave: 0.4
   extraExDamagePerWave: 3
   extraSpawnDelayPerWave: 0.4
