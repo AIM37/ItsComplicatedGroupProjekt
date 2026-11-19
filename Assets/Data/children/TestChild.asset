@@ -19,13 +19,14 @@ MonoBehaviour:
   wantedItems:
   - neededItem: {fileID: 1863340948859505573, guid: 32ee1c1a73b104dd39697b4676bb1070, type: 3}
     defaultCurrentStat: 70
-    currentStat: 65
+    currentStat: 70
     intervalStat: 10
-    intervaltimer: 3.0261452
-    giveTimer: -0.000620559
+    intervaltimer: 6.744474
+    giveTimer: -0.00006301422
   - neededItem: {fileID: 7279687295218252685, guid: a5b33572093b745d38c2353566ad9116, type: 3}
     defaultCurrentStat: 70
     currentStat: 70
     intervalStat: 10
-    intervaltimer: 5.6349506
-    giveTimer: -0.00059423177
+    intervaltimer: 9.352843
+    giveTimer: -0.00006301422
+  ePrompt: {fileID: 3578000160341430533, guid: 89c158a3ad2767c41a2cc728fea506d3, type: 3}

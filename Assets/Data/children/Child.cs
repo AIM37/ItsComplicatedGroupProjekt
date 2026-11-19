@@ -11,6 +11,7 @@ public class Child : ScriptableObject
     public Vector2 position;
     public float scale = 1f;
     public List<ChildNeed> wantedItems;
+    public GameObject ePrompt;
 
     public void UnofficialUpdate()
     {
