@@ -11,20 +11,12 @@ public class ChildManager : MonoBehaviour
         
         foreach(Child child in childern)
         {
-            foreach (ChildNeed need in child.wantedItems)
-            {
-                need.currentStat = need.GiveDefaultCurrentStat();
-            }
-            var newChild = new GameObject(child.name);
-            var sortingLayer = newChild.AddComponent<SpriteRenderer>();
-            sortingLayer.sprite = child.sprite;
-            sortingLayer.sortingOrder = 2;
-            newChild.AddComponent<CircleCollider2D>().isTrigger = true;
-            newChild.AddComponent<ChildObject>().Init(child, this);
-            newChild.transform.SetParent(transform, false);
-            newChild.transform.localPosition = child.position;
-            newChild.transform.localScale = new Vector3(child.scale, child.scale, 1f);
+            SpawnChild(child);
         }
+
+
+
+        
     }
     private void Update()
     {
@@ -35,6 +27,27 @@ public class ChildManager : MonoBehaviour
                 child.UnofficialUpdate();
             }
         }
+    }
+
+    void SpawnChild(Child child)
+    {
+        Vector3 ePromptOffset = new Vector3(0f, 1f, 0f);
+        foreach (ChildNeed need in child.wantedItems)
+        {
+            need.currentStat = need.GiveDefaultCurrentStat();
+        }
+        var newChild = new GameObject(child.name);
+        var sortingLayer = newChild.AddComponent<SpriteRenderer>();
+        sortingLayer.sprite = child.sprite;
+        sortingLayer.sortingOrder = 2;
+        var collider = newChild.AddComponent<BoxCollider2D>();
+        collider.isTrigger = true;
+        collider.size = new Vector2(10f, 10f);
+        newChild.transform.SetParent(transform, false);
+        newChild.transform.localPosition = child.position;
+        newChild.transform.localScale = new Vector3(child.scale, child.scale, 1f);
+        GameObject instantiate = Instantiate(child.ePrompt, newChild.transform.position + ePromptOffset, Quaternion.identity, transform);
+        newChild.AddComponent<ChildObject>().Init(child, this, instantiate);
     }
 
     public bool CheckForSadChild()
