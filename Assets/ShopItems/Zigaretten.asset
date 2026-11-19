@@ -16,6 +16,6 @@ MonoBehaviour:
   price: 30
   description: Lenkt den Ex kurzzeitig ab
   icon: {fileID: 0}
-  effectStrength: 0
-  effectDuration: 0
+  effect: {fileID: 11400000, guid: afcbd7b08f8e14bf38b8d09021a59610, type: 2}
   deliveryPrefab: {fileID: 0}
+  applyImmediately: 0

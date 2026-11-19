@@ -8,7 +8,8 @@ public class Collectible : MonoBehaviour
         Heart,
         Money,
         Toy,
-        Food
+        Food,
+        Cigarettes
     }
 
     public ResourceType resourceType;
