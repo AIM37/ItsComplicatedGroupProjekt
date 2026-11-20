@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
         return waveManager.GetWaveRunning();
     }
 
+    public string GetClockTimeAfterSeconds(float additionalSeconds)
+    {
+        return waveManager.GetClockTimeAfterSeconds(additionalSeconds);
+    }
+
     public int GetStress()
     {
         return playerManager.GetStress();

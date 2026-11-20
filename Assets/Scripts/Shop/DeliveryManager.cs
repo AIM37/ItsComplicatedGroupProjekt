@@ -29,4 +29,8 @@ public class DeliveryManager : MonoBehaviour
         );
     }
 
+    public float GetDeliveryTime()
+    {
+        return deliveryTime;
+    }
 }

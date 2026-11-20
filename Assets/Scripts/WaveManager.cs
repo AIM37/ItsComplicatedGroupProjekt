@@ -166,6 +166,17 @@ public class WaveManager : MonoBehaviour
         timerText.text = $"{hours:00}:{minutes:00}";
     }
 
+    public string GetClockTimeAfterSeconds(float additionalSeconds)
+    {
+        float futureElapsed = (waveDuration - timeLeft) + additionalSeconds;
+        float dayProgress = Mathf.Clamp01(futureElapsed / waveDuration);
+        int totalMinutes = Mathf.FloorToInt(dayProgress * 24f * 60f);
+        totalMinutes = totalMinutes / 15 * 15;
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+        return $"{hours:00}:{minutes:00}";
+    }
+
     void EndWave(bool won)
     {
         GameManager.Instance.DeactivateUnimportendUI();
