@@ -122,8 +122,9 @@ public class WaveManager : MonoBehaviour
         toySlider.value = allNeeds[0].currentStat;
         foodSlider.value = allNeeds[1].currentStat;
         Inventory inventory = GameManager.Instance.GetInventory();
-        foodCount.text = $"{inventory.GetInventoryList().Count(x => x.GetComponent<Food>() != null)}x";
-        toyCount.text = $"{inventory.GetInventoryList().Count(x => x.GetComponent<Toy>() != null)}x";
+        //Wird später noch verändert
+        foodCount.text = $"{inventory.GetInventoryList().Where(x => x.item.GetComponent<Food>() != null).Sum(e => e.count)}x";
+        toyCount.text = $"{inventory.GetInventoryList().Where(x => x.item.GetComponent<Toy>() != null).Sum(e => e.count)}x";
     }
 
     private bool LostWave()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InventoryDropper : MonoBehaviour //Muss in Inventory Manager umgeschrieben werden
+public class InventoryManager : MonoBehaviour //Muss in Inventory Manager umgeschrieben werden
 {
     private int selectedIndex = 0;
     [SerializeField] private float dropDistance = 0.6f;
@@ -20,7 +20,7 @@ public class InventoryDropper : MonoBehaviour //Muss in Inventory Manager umgesc
             || !GameManager.Instance.GetWaveRunning())
             return;
 
-        List<GameObject> items =
+        List<InventoryEntry> items =
             GameManager.Instance.GetInventory().GetInventoryList();
 
         if (items.Count == 0)
@@ -32,14 +32,14 @@ public class InventoryDropper : MonoBehaviour //Muss in Inventory Manager umgesc
         {
             selectedIndex = (selectedIndex + 1) % items.Count;
 
-            Debug.Log("Ausgewählt: " + items[selectedIndex].name);
+            Debug.Log("Ausgewählt: " + items[selectedIndex].item.name);
         }
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             if (!IsNearInteraction())
             {
-                UseItem(items[selectedIndex]);
+                UseItem(items[selectedIndex].item);
             }
         }
     }
