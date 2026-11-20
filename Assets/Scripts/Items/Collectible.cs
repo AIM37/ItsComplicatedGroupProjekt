@@ -1,8 +1,9 @@
 using UnityEngine;
-
-//Sehr fragile Klasse,
-public class Collectible : MonoBehaviour
+public abstract class Collectible : MonoBehaviour
 {
+    public virtual bool instantUse => false;
+
+    public abstract void UseItem();
 
     private void OnTriggerEnter2D(Collider2D other)
     {

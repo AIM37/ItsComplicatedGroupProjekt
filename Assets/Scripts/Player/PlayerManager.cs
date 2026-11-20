@@ -8,19 +8,15 @@ public class PlayerManager : MonoBehaviour
 
     public void Collect(GameObject resource)
     {
-        switch (resource.tag)
+        if (resource.GetComponent<Collectible>() == null)
         {
-            case "Money":
-                inventory.AddMoney(10);
-                break;
-            case "Health":
-                AddStress(-10);
-                break;
-            default:
-                inventory.AddItem(resource);
-                break;
-
+            Debug.LogError($"{resource} hat kein Script");
+            return;
         }
+        Collectible script = resource.GetComponent<Collectible>();
+
+        if (script.instantUse) script.UseItem();
+        else inventory.AddItem(resource);
     }
 
     public void AddStress(int amount)

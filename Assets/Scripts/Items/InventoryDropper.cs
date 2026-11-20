@@ -13,7 +13,7 @@ public class InventoryDropper : MonoBehaviour //Muss in Inventory Manager umgesc
 
     private void Update()
     {
-        if (Keyboard.current == null)
+        if (Keyboard.current == null) //Ist dieser Check wirklich nötig?
             return;
 
         if (!GameManager.Instance.GetMovementAllowed()
