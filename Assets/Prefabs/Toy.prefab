@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5399016408162528590}
   - component: {fileID: 3440966710402632259}
   - component: {fileID: 6554529790370396688}
-  - component: {fileID: 6444914772698172137}
+  - component: {fileID: 5197291026449918493}
   m_Layer: 0
   m_Name: Toy
   m_TagString: Untagged
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6444914772698172137
+--- !u!114 &5197291026449918493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1863340948859505573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2182f699a968a4446a61cb04037ca417, type: 3}
+  m_Script: {fileID: 11500000, guid: fd722a01f97e4194da47e459e9149cf8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  resourceType: 2
+  m_EditorClassIdentifier: Assembly-CSharp::Toy

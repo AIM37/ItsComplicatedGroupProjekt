@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4984189659158622729}
   - component: {fileID: 7266969102435171296}
   - component: {fileID: 1650260493414390915}
-  - component: {fileID: 5695482471968662811}
+  - component: {fileID: -6139209392036532134}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Health
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5695482471968662811
+--- !u!114 &-6139209392036532134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8547730720757531786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2182f699a968a4446a61cb04037ca417, type: 3}
+  m_Script: {fileID: 11500000, guid: ee6a7f85b6b84974fbfcab852a08b231, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  resourceType: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Heart

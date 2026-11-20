@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InventoryDropper : MonoBehaviour
+public class InventoryDropper : MonoBehaviour //Muss in Inventory Manager umgeschrieben werden
 {
     private int selectedIndex = 0;
     [SerializeField] private float dropDistance = 0.6f;
@@ -39,7 +39,7 @@ public class InventoryDropper : MonoBehaviour
         {
             if (!IsNearInteraction())
             {
-                DropItem(items[selectedIndex]);
+                UseItem(items[selectedIndex]);
             }
         }
     }
@@ -67,7 +67,7 @@ public class InventoryDropper : MonoBehaviour
 
 
     
-    private void DropItem(GameObject item)
+    private void UseItem(GameObject item)
     {
         if (item == null)
             return;
@@ -84,7 +84,7 @@ public class InventoryDropper : MonoBehaviour
         // Prüfen, ob das Item Zigaretten sind
         bool isCigarettes =
             item.TryGetComponent<Collectible>(out var collectible) &&
-            collectible.resourceType == Collectible.ResourceType.Cigarettes;
+            collectible is Cigaretts;
 
         if (isCigarettes)
         {

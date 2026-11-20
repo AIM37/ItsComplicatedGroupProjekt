@@ -3,16 +3,6 @@ using UnityEngine;
 //Sehr fragile Klasse,
 public class Collectible : MonoBehaviour
 {
-    public enum ResourceType
-    {
-        Heart,
-        Money,
-        Toy,
-        Food,
-        Cigarettes
-    }
-
-    public ResourceType resourceType;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

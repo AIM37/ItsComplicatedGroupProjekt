@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6453985289077164924}
   - component: {fileID: 3088689526548265236}
   - component: {fileID: 6010751196733786663}
-  - component: {fileID: 4168772623783072491}
+  - component: {fileID: 8957831083180393898}
   m_Layer: 0
   m_Name: Money
   m_TagString: Money
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4168772623783072491
+--- !u!114 &8957831083180393898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6535187264618773199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2182f699a968a4446a61cb04037ca417, type: 3}
+  m_Script: {fileID: 11500000, guid: aa3b8f9dabaad3141bd8eeb43e4da484, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  resourceType: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Money
