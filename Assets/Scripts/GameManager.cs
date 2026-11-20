@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
         return playerManager.GetInventory().GetMoney();
     }
 
+    public List<Child> GetAllChildren() => childManager.GetChildList();
+
     //Muss Hardcoding geändert werden
     public List<ChildNeed> GetChildValue1()
     {

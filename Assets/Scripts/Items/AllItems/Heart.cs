@@ -5,7 +5,7 @@ public class Heart : Collectible
     public override bool instantUse => true;
     public override bool ItemEffect()
     {
-        GameManager.Instance.AddStress(10);
+        GameManager.Instance.AddStress(-10);
         return false;
     }
 }

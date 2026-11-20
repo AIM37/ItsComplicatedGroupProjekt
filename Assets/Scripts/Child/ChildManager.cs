@@ -13,10 +13,6 @@ public class ChildManager : MonoBehaviour
         {
             SpawnChild(child);
         }
-
-
-
-        
     }
     private void Update()
     {

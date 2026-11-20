@@ -4,6 +4,15 @@ public class Toy : Collectible
 {
     public override bool ItemEffect()
     {
-        throw new System.NotImplementedException();
+        var allChilder = GameManager.Instance.GetAllChildren();
+        foreach (Child child in allChilder) //es sollte bestenfalls immer nur ein Kind auf einmal in reichweite sein
+        { 
+            if (child.GivePlayerInRange())
+            {
+                //foreach (ChildNeed need in child.allNee)
+            }
+        }
+
+        return false;
     }
 }

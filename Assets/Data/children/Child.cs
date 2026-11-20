@@ -12,6 +12,7 @@ public class Child : ScriptableObject
     public float scale = 1f;
     public List<ChildNeed> wantedItems;
     public GameObject ePrompt;
+    private bool playerInRange = false;
 
     public void UnofficialUpdate()
     {
@@ -32,6 +33,9 @@ public class Child : ScriptableObject
             }
         }
     }
+    public void activePlayerInRange() => playerInRange = true;
+    public void deactivePlayerInRange() => playerInRange = false;
+    public bool GivePlayerInRange() => playerInRange;
 }
 
 [Serializable]
@@ -46,7 +50,6 @@ public class ChildNeed
 
     public void SatisfyNeed()
     {
-        giveTimer = 1f;
         currentStat = Mathf.Max(0f, currentStat + 5f);
     }
 
