@@ -37,9 +37,30 @@ public class InventoryDropper : MonoBehaviour
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
+            if (!IsNearChild())
+            {
             DropItem(items[selectedIndex]);
+            }
         }
     }
+
+
+    private bool IsNearChild()
+    {
+        Collider2D[] nearbyColliders =
+            Physics2D.OverlapPointAll(transform.position);
+
+        foreach (Collider2D collider in nearbyColliders)
+        {
+            if (collider.GetComponent<ChildObject>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
     
