@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Food : Collectible
 {
-    public override void UseItem()
+    public override bool ItemEffect()
     {
         throw new System.NotImplementedException();
     }

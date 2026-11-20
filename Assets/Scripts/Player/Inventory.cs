@@ -10,8 +10,12 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
-        var entry = inventory.Find(e => e.item == item);
-        if (entry != null) entry.count++;
+        var entry = inventory.Find(e => e.item.GetComponent<Collectible>().GetType() == item.GetComponent<Collectible>().GetType());
+        if (entry != null)
+        {
+            entry.count++;
+            item.SetActive(false);
+        }
         else inventory.Add(new InventoryEntry { item = item, count = 1 });
         foreach (var e in inventory)
             Debug.Log(e.item.name + " x" + e.count);
@@ -19,16 +23,19 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(GameObject item)
     {
-        var entry = inventory.Find(e => e.item == item);
+        var entry = inventory.Find(e => e.item.GetComponent<Collectible>().GetType() == item.GetComponent<Collectible>().GetType());
         if (entry == null) return;
 
         entry.count--;
-        if (entry.count <= 0) inventory.Remove(entry);
+        if (entry.count <= 0)
+        {
+            inventory.Remove(entry);
+        }
     }
 
     public int GetItemCount(GameObject item)
     {
-        var entry = inventory.Find(e => e.item == item);
+        var entry = inventory.Find(e => e.item.GetComponent<Collectible>().GetType() == item.GetComponent<Collectible>().GetType());
         return entry.count;
     }
 

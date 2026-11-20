@@ -6,17 +6,17 @@ public class PlayerManager : MonoBehaviour
     [SerializeField][Range(0, MaxStress)] private int stress = 50;
     [SerializeField] private Inventory inventory;
 
-    public void Collect(GameObject resource)
+    public void Collect(GameObject item)
     {
-        if (resource.GetComponent<Collectible>() == null)
+        if (item.GetComponent<Collectible>() == null)
         {
-            Debug.LogError($"{resource} hat kein Script");
+            Debug.LogError($"{item} hat kein Script");
             return;
         }
-        Collectible script = resource.GetComponent<Collectible>();
+        Collectible script = item.GetComponent<Collectible>();
 
-        if (script.instantUse) script.UseItem();
-        else inventory.AddItem(resource);
+        if (script.instantUse) script.UseItem(item);
+        else inventory.AddItem(item);
     }
 
     public void AddStress(int amount)

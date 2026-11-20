@@ -3,7 +3,14 @@ public abstract class Collectible : MonoBehaviour
 {
     public virtual bool instantUse => false;
 
-    public abstract void UseItem();
+    public void UseItem(GameObject item)
+    {
+        if (ItemEffect()) RemoveItem(item);
+    }
+
+    private void RemoveItem(GameObject item) => GameManager.Instance.GetInventory().RemoveItem(item);
+
+    public abstract bool ItemEffect(); //true wenn das Item entfernt werden soll, aber ist nicht perfekte Lösung
 
     private void OnTriggerEnter2D(Collider2D other)
     {
