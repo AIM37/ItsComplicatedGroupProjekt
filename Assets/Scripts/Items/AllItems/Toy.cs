@@ -9,7 +9,14 @@ public class Toy : Collectible
         { 
             if (child.GivePlayerInRange())
             {
-                //foreach (ChildNeed need in child.allNee)
+                foreach (ChildNeed need in child.wantedItems)
+                {
+                    if (need.neededItem.name == this.gameObject.name.Replace("(Clone)", "").Trim()) 
+                    {
+                        need.SatisfyNeed();
+                        return true;
+                    }
+                }
             }
         }
 

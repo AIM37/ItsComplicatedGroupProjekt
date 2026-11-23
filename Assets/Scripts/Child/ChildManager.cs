@@ -65,27 +65,4 @@ public class ChildManager : MonoBehaviour
     {
         return childern;
     }
-
-    public void GiveToChild(Child child)
-    {
-        foreach (Child realChild in childern)
-        {
-            if (realChild == child)
-            {
-                var playerInventory = GameManager.Instance.GetInventory().GetInventoryList(); //Maybe einen Weg überlegen wie das etwas kürzer geht
-                foreach (ChildNeed need in realChild.wantedItems)
-                {
-                    foreach (var currentItem in playerInventory)
-                    {
-                        if (need.neededItem.name == currentItem.item.name.Replace("(Clone)", "").Trim()) //Das später schöner mit einer ID oder so machen
-                        {
-                            need.SatisfyNeed();
-                            GameManager.Instance.GetInventory().RemoveItem(currentItem.item);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
