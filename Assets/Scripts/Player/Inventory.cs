@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject inventoryBox;
     private List<InventoryEntry> inventory = new();
     private int money;
 
@@ -16,7 +19,11 @@ public class Inventory : MonoBehaviour
             entry.count++;
             item.SetActive(false);
         }
-        else inventory.Add(new InventoryEntry { item = item, count = 1 });
+        else 
+        {
+            var newSlot = Instantiate(inventoryBox, inventoryCanvas.transform);
+            inventory.Add(new InventoryEntry { item = item, count = 1, slotPlace = newSlot });
+        }
         foreach (var e in inventory)
             Debug.Log(e.item.name + " x" + e.count);
     }
@@ -29,6 +36,7 @@ public class Inventory : MonoBehaviour
         entry.count--;
         if (entry.count <= 0)
         {
+            Destroy(entry.slotPlace);
             inventory.Remove(entry);
         }
     }
@@ -63,4 +71,5 @@ public class InventoryEntry
 {
     public GameObject item;
     public int count;
+    public GameObject slotPlace;
 }
