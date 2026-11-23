@@ -1,6 +1,5 @@
-using System;
+
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Cigaretts : Collectible
 {
@@ -8,11 +7,15 @@ public class Cigaretts : Collectible
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float dropCheckRadius = 0.15f;
     [SerializeField] private GameObject cigarettesTrapPrefab;
+
     public override bool ItemEffect()
     {
-        if (!TryFindDropPosition(out Vector3 dropPosition))
+        // Spieler finden
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player == null)
         {
-            Debug.Log("Kein freier Platz zum Droppen!");
+            Debug.LogWarning("Spieler nicht gefunden!");
             return false;
         }
 
@@ -22,12 +25,23 @@ public class Cigaretts : Collectible
             return false;
         }
 
+        // Freien Platz in der Nähe des Spielers suchen
+        if (!TryFindDropPosition(player.transform.position,
+            out Vector3 dropPosition))
+        {
+            Debug.Log("Kein freier Platz zum Droppen!");
+            return false;
+        }
+
         // Zigaretten-Falle platzieren
-        Instantiate(cigarettesTrapPrefab, dropPosition, Quaternion.identity);
+        Instantiate(cigarettesTrapPrefab,
+            dropPosition, Quaternion.identity);
+
         return true;
     }
 
-    private bool TryFindDropPosition(out Vector3 dropPosition)
+    private bool TryFindDropPosition(
+        Vector3 playerPosition, out Vector3 dropPosition)
     {
         Vector2[] directions =
         {
@@ -44,14 +58,14 @@ public class Cigaretts : Collectible
         foreach (Vector2 direction in directions)
         {
             Vector2 candidate =
-                (Vector2)transform.position + direction * dropDistance;
+                (Vector2)playerPosition + direction * dropDistance;
 
             bool positionBlocked = Physics2D.OverlapCircle(
                 candidate, dropCheckRadius, obstacleLayer
-           ) != null;
+            ) != null;
 
             bool pathBlocked = Physics2D.CircleCast(
-                transform.position,
+                playerPosition,
                 dropCheckRadius,
                 direction,
                 dropDistance,
@@ -65,7 +79,7 @@ public class Cigaretts : Collectible
             }
         }
 
-        dropPosition = transform.position;
+        dropPosition = playerPosition;
         return false;
     }
 }

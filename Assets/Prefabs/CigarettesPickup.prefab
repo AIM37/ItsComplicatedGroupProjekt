@@ -152,3 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a81f9a4538cb1f47bf14b020beed167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cigaretts
+  dropDistance: 0.6
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  dropCheckRadius: 0.15
+  cigarettesTrapPrefab: {fileID: 6005955848062637062, guid: 605bce5b86a604a8789061413a7ad225, type: 3}
