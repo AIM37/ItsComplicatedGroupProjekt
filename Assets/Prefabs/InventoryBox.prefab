@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6372720721106515996}
   - component: {fileID: 65635097680397664}
   m_Layer: 0
-  m_Name: InventoryTitle (1)
+  m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 6864381357065209552}
   - component: {fileID: 1748586544128993479}
   m_Layer: 0
-  m_Name: ToyCollectable_0
+  m_Name: Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -31,8 +31,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider stressSlider;
     [SerializeField] private UnityEngine.UI.Slider toySlider;
     [SerializeField] private UnityEngine.UI.Slider foodSlider;
-    [SerializeField] private TMP_Text toyCount;
-    [SerializeField] private TMP_Text foodCount;
     [SerializeField] private GameObject waveCompletet;
     [SerializeField] private GameObject gameoverText;
 
@@ -122,9 +120,6 @@ public class WaveManager : MonoBehaviour
         toySlider.value = allNeeds[0].currentStat;
         foodSlider.value = allNeeds[1].currentStat;
         Inventory inventory = GameManager.Instance.GetInventory();
-        //Wird später noch verändert
-        foodCount.text = $"{inventory.GetInventoryList().Where(x => x.item.GetComponent<Food>() != null).Sum(e => e.count)}x";
-        toyCount.text = $"{inventory.GetInventoryList().Where(x => x.item.GetComponent<Toy>() != null).Sum(e => e.count)}x";
     }
 
     private bool LostWave()

@@ -1,7 +1,8 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -17,15 +18,35 @@ public class Inventory : MonoBehaviour
         if (entry != null)
         {
             entry.count++;
+            TextChange(entry);
             item.SetActive(false);
         }
-        else 
+        else
         {
-            var newSlot = Instantiate(inventoryBox, inventoryCanvas.transform);
-            inventory.Add(new InventoryEntry { item = item, count = 1, slotPlace = newSlot });
+            CreateNewSlot(item);
         }
         foreach (var e in inventory)
             Debug.Log(e.item.name + " x" + e.count);
+    }
+
+    private void CreateNewSlot(GameObject item)
+    {
+        var newSlot = Instantiate(inventoryBox, inventoryCanvas.transform);
+        var newItem = new InventoryEntry { item = item, count = 1, slotPlace = newSlot };
+        inventory.Add(newItem);
+
+        SpriteRenderer inventorySprite = newSlot.transform.Find("Collectable").GetComponent<SpriteRenderer>();
+        Debug.Log(item.name);
+        Debug.Log(inventorySprite.name);
+        inventorySprite.sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+
+        TextChange(newItem);
+    }
+
+    private void TextChange(InventoryEntry entry)
+    {
+        TMP_Text count = entry.slotPlace.transform.Find("Count").GetComponent<TMP_Text>();
+        count.text = ($"{entry.count}x");
     }
 
     public void RemoveItem(GameObject item)
