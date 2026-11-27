@@ -1,10 +1,14 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject inventoryBox;
     private List<InventoryEntry> inventory = new();
     private int money;
 
@@ -14,11 +18,35 @@ public class Inventory : MonoBehaviour
         if (entry != null)
         {
             entry.count++;
+            TextChange(entry);
             item.SetActive(false);
         }
-        else inventory.Add(new InventoryEntry { item = item, count = 1 });
+        else
+        {
+            CreateNewSlot(item);
+        }
         foreach (var e in inventory)
             Debug.Log(e.item.name + " x" + e.count);
+    }
+
+    private void CreateNewSlot(GameObject item)
+    {
+        var newSlot = Instantiate(inventoryBox, inventoryCanvas.transform);
+        var newItem = new InventoryEntry { item = item, count = 1, slotPlace = newSlot };
+        inventory.Add(newItem);
+
+        SpriteRenderer inventorySprite = newSlot.transform.Find("Collectable").GetComponent<SpriteRenderer>();
+        Debug.Log(item.name);
+        Debug.Log(inventorySprite.name);
+        inventorySprite.sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+
+        TextChange(newItem);
+    }
+
+    private void TextChange(InventoryEntry entry)
+    {
+        TMP_Text count = entry.slotPlace.transform.Find("Count").GetComponent<TMP_Text>();
+        count.text = ($"{entry.count}x");
     }
 
     public void RemoveItem(GameObject item)
@@ -29,6 +57,7 @@ public class Inventory : MonoBehaviour
         entry.count--;
         if (entry.count <= 0)
         {
+            Destroy(entry.slotPlace);
             inventory.Remove(entry);
         }
     }
@@ -63,4 +92,5 @@ public class InventoryEntry
 {
     public GameObject item;
     public int count;
+    public GameObject slotPlace;
 }
