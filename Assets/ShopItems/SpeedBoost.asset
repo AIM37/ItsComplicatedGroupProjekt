@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeItem
   itemName: SpeedBoost
   price: 60
-  description: Spieler bewegt sich schneller
-  icon: {fileID: 0}
+  description: Increases your movement speed.
+  icon: {fileID: 906388131340123023, guid: 2f39385bbb1a2448f8d072e1e74f4382, type: 3}
   effect: {fileID: 11400000, guid: a2445216c763c47709283fa885ab212a, type: 2}
   maxLevel: 3

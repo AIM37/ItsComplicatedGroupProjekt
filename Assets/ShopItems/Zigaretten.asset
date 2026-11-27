@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItem
   itemName: Zigaretten
   price: 40
-  description: Lenkt den Ex kurzzeitig ab
+  description: Distracts your ex for 10 seconds.
   icon: {fileID: -4550600298922340042, guid: a63d6dc71897642429a37f98f890c45b, type: 3}
   effect: {fileID: 11400000, guid: afcbd7b08f8e14bf38b8d09021a59610, type: 2}
   deliveryPrefab: {fileID: 7279687295218252685, guid: 5584a7155ee5d412e89212468c7f83c9, type: 3}

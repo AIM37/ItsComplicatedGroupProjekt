@@ -1854,7 +1854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Zigaretten 40 \u20AC"
+  m_text: "Zigaretten 40 \u20AC\n<size=16><color=#B8C4D4>Distracts your ex for 10 seconds.</size></color></size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6191,7 +6191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "SpeedBoost 60 \u20AC"
+  m_text: "Speed 60 \u20AC\n<size=16><color=#B8C4D4>Increases your movement speed.</size></color></size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6328,7 +6328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Toy 50 \u20AC"
+  m_text: "Toy 50 \u20AC\n<size=16><color=#B8C4D4>Restores 5 Fun points.</color></size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8866,7 +8866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Massage 50 \u20AC"
+  m_text: "Massage 50 \u20AC\n<size=16><color=#B8C4D4>Reduces your stress level immediately.</size></color></size>\n<size=16><color=#B8C4D4>-25.</size></color></size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13130,8 +13130,6 @@ MonoBehaviour:
   stressSlider: {fileID: 2110594511}
   toySlider: {fileID: 138012019}
   foodSlider: {fileID: 672022525}
-  toyCount: {fileID: 0}
-  foodCount: {fileID: 0}
   waveCompletet: {fileID: 1581893474}
   gameoverText: {fileID: 199417043}
   resourceSpawner: {fileID: 338826662}
@@ -13283,7 +13281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Food 10 \u20AC"
+  m_text: "Food 10 \u20AC\n<size=16><color=#B8C4D4>Restores 5 hunger points.</color></size> "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
